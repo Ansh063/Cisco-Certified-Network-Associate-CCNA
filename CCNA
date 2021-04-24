@@ -1,0 +1,32 @@
+
+Cisco Certified Network Associate - Notes : 
+
+-> IP is 32 bit Binary Number.
+-> 1 Byte = 8 Binary Bits.
+-> Router always check for network Section of IP address for routing packets.
+
+Address Classes : 
+Class A, Class B, Class C = Unicast Traffic 
+Class D = Multicast 
+Class E = Reserved for future or Experimental Purpose	
+
+
+## IPv4 Private Ip range : 
+--------------------------
+
+RFC1918 name	IP address range	        Largest CIDR block          Host ID size  Mask bits        Class
+
+24-bit block	10.0.0.0 – 10.255.255.255	10.0.0.0/8 (255.0.0.0)	      24 bits	   8 bits	single class A network
+20-bit block	172.16.0.0 – 172.31.255.255     172.16.0.0/12 (255.240.0.0)   20 bits      12 bits	16 contiguous class B networks
+16-bit block	192.168.0.0 – 192.168.255.255	192.168.0.0/16 (255.255.0.0)  16 bits	   16 bits	256 contiguous class C networks
+
+## IPv6 Private Ip : 
+--------------------
+
+In IPv6 there is a special "Unique Unicast" IP range of fc00::/7
+
+
+Cisco Packet Tracer Commands 
+
+show mac-address table  : display the mac address table 
+
