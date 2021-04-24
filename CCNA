@@ -5,7 +5,7 @@ Cisco Certified Network Associate - Notes :
 -> 1 Byte = 8 Binary Bits.
 -> Router always check for network Section of IP address for routing packets.
 
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 Address Classes : 
 Class A, Class B, Class C = Unicast Traffic 
@@ -27,28 +27,28 @@ Class D = 224.0.0.0 - 239.255.255.255
 
 Class E = 240.0.0.0 - 255.255.255.255
  
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 # Direct Broadcast address : all the host bit set to 1 eg. 172.31.0.1/16 => 172.31.255.255 is the Direct Broadcast address
 
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 # Local Braodcast Address : 255.255.255.255 : use in DHCP 
   Local Broadcast address is always Drop by ROUTERS. 
 
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 # Local Loopback address IPv4 : 127.0.0.1  or 127.X.X.X is a loop back address 
 			 IPv6 : ::1
   Router have loopback addresses which are not the same as the local loopback address  
   Router and Switches can also be configured with valid IP addresses on what's called a Loopback Interface. 
    
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 # IPv4 Link-Local Address : Allow two computer to communicate when there are no DHCP servers available. : 169.254.0.0/16 
   This address range is non routable. 
 
-   
+-------------------------------------------------------------------------------------------------------------------------------
 
 # Private Ip Address : non routeable on the internet.  
 ## IPv4 Private Ip range : 
@@ -64,13 +64,16 @@ RFC1918 name	IP address range	        Largest CIDR block          Host ID size  
 --------------------
 In IPv6 there is a special "Unique Unicast" IP range of fc00::/7
 
-   
 
+-------------------------------------------------------------------------------------------------------------------------------
 
-
-   
 
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
 
