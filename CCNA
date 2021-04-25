@@ -64,16 +64,59 @@ RFC1918 name	IP address range	        Largest CIDR block          Host ID size  
 --------------------
 In IPv6 there is a special "Unique Unicast" IP range of fc00::/7
 
+-------------------------------------------------------------------------------------------------------------------------------
+
+## Subnet Mask : used to determine host and network portion. 
+   
+-------------------------------------------------------------------------------------------------------------------------------
+
+## Discontinuous Network Mask : Cisco Does not support Discontiguous mask 
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+## IP Subnetting : 
+	Subnetting Part 1 : 	
+		-> Method1 = Binary Method 
+		-> Method2 = Quick Method 
+	IP address : 1. Subnet Address 
+		     2. 1st Host Address 
+		     3. Last Host Address 
+		     4. Broadcast Address 
+Binary Method :
+	Network/Subnet Address : 	
+		- Fill the host portion of an address with binary 0's
+	Boradcast address : 
+		- Fill the host portion of an address with Binary 1's
+	First Host : 
+		- Fill the host portion of an address with binary 0's except the last bit which set to 1
+	Last Host : 
+		- Fill the host portion of an address with Binary 1's except the last bit which set to 0  		
+			
+
+-------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
-
+enable 			: change user exec mode to privilege mode 
+show version		: display the version 
+configure terminal  	: for device configuration 
+host [hostname]		: to change the host name 
+copy running config startup config : to save the running configuration or to saving it on NV (Non-volatile ) Ram 
+wr			: same function as the copy running config startup config
+Router# show ip interface brief : show all the interface 
+interface [interface]	: Set the interface = interface gigabit 0/0/0  
+router(config-if)# ip address [ipaddress] [subnet mask] : this command will set the IP on the selected interface 
+Router(Config)# enable password "password": used to implement password.
+Router(Config)# service password-encryption : encrypt the clear text password
+Router(config)# enable secret [password] : it provide more security and it overrides the enable password
+router(config)# line vty 0 5 : To configure telnet
+router(config-line)# password cisco : set the password to telnet 
+      
 
 -------------------------------------------------------------------------------------------------------------------------------
 
-
+-> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
+-> Privilege EXEC (also called enable mode / mode like root ) or administrative mode prompt : Switch#
+ 
 
