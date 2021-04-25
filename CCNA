@@ -91,7 +91,64 @@ Binary Method :
 		- Fill the host portion of an address with binary 0's except the last bit which set to 1
 	Last Host : 
 		- Fill the host portion of an address with Binary 1's except the last bit which set to 0  		
-			
+				
+Quick  Method : 
+	Shortcut Table : 128   68   32   16   8    4    2    1 
+			 128   192  224  240  248  252  254  255
+       	
+	first host = Subnet + 1
+	172.16.32.0 + 1 = 172.16.32.1
+	Last Host = Boradcast - 1
+	172.16.47.255 - 1 = 172.16.47.254	
+	Broadcast address = Next Network Address - 1
+	172.16.48.0 - 1 = 172.16.47.255
+	  
+PART 2 - IMPORTANT : 
+
+-> How to Sub-Divide a network/subnet when given: 
+	- Specific Number of Host required - Subdivide a Specific network/subnet that you where given into multiple subnets  	
+	- Specific number of Subnets - Multiple Subnets 
+	
+To find how many host supported on an subnet is = 2^n - 2
+	for example suppose a subnet is given as /24 this means that host has 8 bits = 2^8 - 2
+	
+Subnetting : 
+it Involves : Stealing or taking away bits from the host portion of an address.  
+	      Allocating the stolen bit to the network portion of a new address. 
+	
+Two Important rules : 
+	When ask for the number of hosts = HOSTS =         2^n - 2
+		Note : Count Host bits from right to left 
+	When ask for number of networks = NETWORKS =        2^n 
+		Note : Count Network bit from left to right 
+	
+Shortcut table : 	
+		2^1  = 2
+		2^2  = 4
+		2^3  = 8
+		2^4  = 16
+		2^5  = 32
+		2^6  = 64
+		2^7  = 128	
+		2^8  = 256
+		2^9  = 512
+		2^10 = 1024
+	
+After moving the bits to network portion we have :
+Step 6 : We have to workout on various subnet 
+	 to work on the subnet go through the various binary combinations for the subnet portion of the address : 
+Network 		SUBNET		HOST 		Single Octet
+
+1st network= 10.1.1.     0000	        0000		10.1.1.0/28 
+2nd network= 10.1.1.	 0001 		0000		10.1.1.16/28
+3rd network= 10.1.1.	 0010		0000		10.1.1.32/28
+.
+.
+.
+Last networ= 10.1.1.	1111		0000		10.1.1.240/28
+
+To find subnet = 2^n = 2^4 = 16
+To find host = 2^n -2  = 16-2 = 14
 
 -------------------------------------------------------------------------------------------------------------------------------
 
