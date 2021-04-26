@@ -224,6 +224,8 @@ Devices  :
 3. Switch : ASICS (Application Specific integrated Cicuits) 
 
 4. Router : layer 3 device 
+  -> Layer 2 information is rewritten, the layer 3 informaation is left the same but every time traffic hops across the router or is sent from 1 VLAN to another VLAN the layer 2 information is rewritten in the frame when the traffic is received by the hub, it will flood it out of all ports. 
+  
 	 
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -251,4 +253,16 @@ router(config-line)# password cisco : set the password to telnet
 -> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
 -> Privilege EXEC (also called enable mode / mode like root ) or administrative mode prompt : Switch#
  
+
+
+
+
+
+
+
+
+
+Nahi Aata : 
+
+1. How to find collision domains and Broadcast Domains 
 
