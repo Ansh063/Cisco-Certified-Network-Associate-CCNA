@@ -152,6 +152,75 @@ To find host = 2^n -2  = 16-2 = 14
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+Types of Communication : 
+	
+1. Unicast   - One to One. 
+2. Broadcast - One to All, Broadcast to local subnet means all the device in subnet receive the packet. 
+3. Multicast - One to Some Those device will get the packet who subscribe for the sevice.   
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Cables : 
+Baseband : Only allows Single signal 
+Broadband: Allows multiple signals 
+
+-> Terminator is used in Coaxial cable to stop signal Bouncing back. 
+-> Cable Length : the longer the cable greater Signal degradation. 
+-> Cable Breaks : This will stop the complete functionality. 
+-> Single Collision Domain : If a collisio takes place at any point on the network all device on the network are affected by that collision and would need to back off. 
+-> Single Broadcast Domain : In other words if a device A sends a broadcast message everyone in the network would receive that broadcast and would need to process he broadcast. 
+
+Unshielded Twisted Pair(UTP) : 
+Straight through Cable : PC <-> Switch, PC <-> Hub, PC <-> Bridge, Router <-> Switch 
+Cross Over Cable : allows us to connect two device of same type : router <-> router, Switch <-> Switch, Hub <-> Hub, PC <-> PC
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Auto MDIX : Medium Dependent interface Crossover
+	    Normally Routers and PCs use MDI
+	    Normally switches and Hub uses MDIX. 
+	    Auto MDI/MDIX allows for automatic switching once a cable is connected 
+	    Auto detect cable type (crossover/straightthroug) 
+   
+MDI(Media Independent Interface) is an Ethernet Port connections typically use on network interface card or NICs of PCs 
+MDI is also use ny the routers and can be used on uplink ports on ethernet switches. 
+
+Direct Attachment cable (DAC) : uses copeer twinax and has SFP at its each end 
+				SFP (Small FormFactor Pluggable) - hot pluggable transreceiver 
+				
+Roll Over cable : Used to connect to the consoles of netwoking devices. it allow you to connect from the serial port on your PC or laptop to the consol port of the switch or router. 
+ 
+-------------------------------------------------------------------------------------------------------------------------------
+
+MAC Address : 
+  24 bits of OUI 
+  0 : Unicast 
+  1 : Multicast 
+
+CSMA/CD : Carrier Sense Multiple access / Collision detection 
+This operates as follows when a device want to send traffic it should first check to hear if any other device is speaking so the device will not communicate onto the network if it hears another device. : Carrier Sense. 
+Multiple access means that any device can communicate across the segment as long as no other device is communicating. 
+When a device detect that a collision has taken place it may send a "Backoff / JAM " signal to indicate that the collision has taken place.
+
+-------------------------------------------------------------------------------------------------------------------------------
+Devices  : 
+
+1. HUB : Layer 1 Device (Physical layer Device) 
+	 Multi Port repeater 
+	 used in star topology
+	 It will simply amplifies the signal and send the traffic or frames out of all ports. 
+ 	 As you increases the number of devices in a hub environment the number of collision increases and your network throughput goes down
+	 		
+2. Bridge : layer 2 Device (Data Link Layer)
+	    Has a Mac address table 
+	    Star Topology 
+	    CAM Table - Content Addressable Memory  
+	    
+  -> Switches and Bridges operates in a very similar way , but bridges do the processing on the software where as the switch do the processing on hardware. 
+  -> Switches uses Something called an ASIC (Application Specific Integrated Circuit) Which allow for high throughput, very quick table lookup and forwarding the traffic. 
+  ->  	 
+-------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
