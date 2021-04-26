@@ -217,8 +217,14 @@ Devices  :
 	    CAM Table - Content Addressable Memory  
 	    
   -> Switches and Bridges operates in a very similar way , but bridges do the processing on the software where as the switch do the processing on hardware. 
-  -> Switches uses Something called an ASIC (Application Specific Integrated Circuit) Which allow for high throughput, very quick table lookup and forwarding the traffic. 
-  ->  	 
+  -> Switches uses Something called an ASIC (Application Specific Integrated Circuit) Which allow for high throughput, very quick table lookup and forwarding the traffic.Switches don't slow the traffic down.  
+  -> Bridges are lot slower than switches rest all are same as switch 
+  -> Each port on a bridge is a seperate collision Domain and single broadcast domain. 
+
+3. Switch : ASICS (Application Specific integrated Cicuits) 
+
+4. Router : layer 3 device 
+	 
 -------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
