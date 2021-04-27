@@ -229,6 +229,20 @@ Devices  :
 	 
 -------------------------------------------------------------------------------------------------------------------------------
 
+Collision and Broadcast Domain : 
+	
+-> Hub is a Single boradcast domain as well as single Collision Domain 
+-> Collision never happens between two devices, which are connected to different ports of a Switch.
+-> Switches will break in the collision domain. 
+-> Switches will never break in the broadcast domain.
+-> In, collision domain, every port on a router are in the separate broadcast domains.
+-> each port on a hub is in the same collision domain. Each port on a bridge, a switch or router is in a seperate collision domain.
+-> 
+
+
+
+
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
