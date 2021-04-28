@@ -237,11 +237,114 @@ Collision and Broadcast Domain :
 -> Switches will never break in the broadcast domain.
 -> In, collision domain, every port on a router are in the separate broadcast domains.
 -> each port on a hub is in the same collision domain. Each port on a bridge, a switch or router is in a seperate collision domain.
--> 
 
+-------------------------------------------------------------------------------------------------------------------------------
 
+Speed and Duplex Settings : 
+	
+- Auto negotiation on both the side or 
+- Hard coded on both the side.
+ 
+-------------------------------------------------------------------------------------------------------------------------------
 
+Loopback address : 
 
+A loopback interface is the logical interface on a router and you can create many of these.
+/32 ip address . this is the only ip address on that interface, it won't go down unless you manually shut the interface down.
+
+Advanteages of loopback address : 
+- interface doesn't go down unless you explicitly shut it down.
+- you can use the loopback interface for diagnostics and troubleshooting purposes 	  
+- Routing protocols such as OSPF use the loop back address to determine the router ID in the OSPF network. 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Socket : Combination of IP address of a host and a port number and the transport protocol used. 
+Session Multiplexing : Single host with single ip address is able to communicate with multiple server. 
+		       Connection must first established between sender and reciever.
+		       ex. one brower with many tabs like google,yahoo,gmail.
+TCP / UDP : 
+	
+	Segmentation : 
+		- MTU (Maximum Transmission Unit) depends on Physical medium 
+ 		ex. MTU of fastethernet is 1500 bytes 
+		- Maximum Segment Size is the largest amount of data 
+		- TCP supports MSS and path MTU discovery 
+			- sender and receiver can automatically determine maximum transmission
+	Flow Control : 
+		- if the sender send the data faster than the receiver can handle , receiver drop data and require retransmission. 
+		- TCP use a sliding window to control flow of data 
+		- UDP does not involve flow control 
+	
+	Connection Oriented : 
+		- TCP is connection oriented 
+	
+	Reliability : 
+		- every segment tranmitted is acknowledge 
+
+TCP : 
+	- Transport Layer protocol 
+	- access to the network layer to the application 
+	- connection oriented 
+	- full duplex mode operation 	
+	- error checking - Checksum 
+	- sequencing of data packet 
+	- Acknowledgement of receipt 
+	- data recovery feature
+	
+TCP Header : 
+	16 bit source port number 
+	16 bit destination port number 
+	32 bit sequence number 
+	32 bit acknowledgement number 
+	flags 
+		- Congestion Window Reduced (CWR)
+		- Echo Congestion Notification Echo field or flag 
+		- Urgent (URG)
+		- ACKNOWLEDGEMENT 
+		- PSH is the flag set by the TCP header to cause the TCP receiver to immediate pass that segments data to the receiver application socket 
+		- Reset 
+		- synchronize 
+		- Finish
+	Window size 
+	16 bit TCP Checksum 
+	16 bit urgent pointer 
+	options 
+	data 
+		
+-------------------------------------------------------------------------------------------------------------------------------
+
+Port Number : 
+
+Well known port number 0 to 1023. 
+Registered port number 1024 to 49151.
+dynamic or Private ports 49152 to 65535.
+DNS use UDP on port 53 to serve request, TCP is used when response data exceeds 512 bytes for task such as Zone Transfer 
+Zone Transfer : Zone Transfer is used for replication of databases containing DNS data across a set of DNS server. 
+
+Ephemeral Port Numbers : 
+short lived port used for client side connection 
+temporary only last for the duration of the session 
+IANA suggest 49151 to 65535
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Flow Control : 
+
+TCP : 
+	rather than using a fixed window size it uses a sliding windows, it start with small window size and increses exponentially
+
+Window Size : 
+	Window granted to sender 
+	congestion window (CWND) : The Congestion Window or CWND is initially set to very low value and then increases at exponential rate 
+	for every lost segment the congestion window is set half after the lost packet is resent then the congestion window start increasing 
+	exponentially.
+	it then slows down its growth , using an algorithm called congestion avoidance 
+
+In quality of Service Weighted random Early detetction or WRED can be used to increase efficiency of TCP transmission. 
+ 
+		
+-------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
 
