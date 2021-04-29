@@ -385,9 +385,64 @@ The tag consist of two main part :
 	- VLAN ID : 12 Bit field specifying the VLAN ID  
 
 Native VLAN : 
-Native Vlan is untagged when a port on a switch is setup as a trunk. frame belonging to the native vlan do not carry violent tags when sent over this trunk by the same point if an untagged frame were received on the trunk port the fram would automatically  	
-		
+Native Vlan is untagged when a port on a switch is setup as a trunk. frame belonging to the native vlan do not carry violent tags when sent over this trunk by the same point if an untagged frame were received on the trunk port the fram would automatically 
 	 		  	
+Management Traffic : 
+	- Always use Native VLANs
+		- STP BPDU 
+		- DTP : Dynamic trunking protocol is a way that switches negotiate to set up a trunk between themselves automatically. 
+	- Always use VLAN 1 , tagged it native VLAN not VLAN 1 
+		- CDP : It allow us to view directly Connected Device and Trunking protocol 
+		- VTP : It is a way to dynamically update other switches with changes made on a single switch in a VTB Domain. 
+		- PAgP : or port aggregation is a protocol used for the automatic creation of ether channels.
+		- UDLD : Uni Directional link detection is used to monitor the physical configuration of cables between devices and detect unique directional links. This allows us to detect incorrectly cabled links. 
+
+Port Assignment : 
+
+- Static VLANs : Administrator can directly put that interface into VLAN 
+- Dynamic VLANS : using VMPS (Vlan membership policy server) 
+		  Dynamic VLANS allow for the port deal and to be dynamicaly updated based on the mac address of the device. 
+		   
+VTP (Vlan Trunking Protocol) : It is a Cisco propriatory layer 2 protocol which allow for the propagation of the vlan information from one switch to another rather than telnetting to multiple switches . 		
+- Allows for propagation of VLAN information 
+	- Additional, Deletion and renaming of VLANS
+- Propagated across the trunk links.
+- Uses MAC Address : 01-00-0C-CC-CC-CC Which is the well known multicast address for flooding of the CDP and DTP protocols : 
+There are three types of message in VTP : 
+	- Summary Advertisements : Advertisement occur when there is any changes occur.  
+	- Subset Adver. : multicast advertisement. 
+	- Advertisement Requests : request the changes that occurs  
+
+VTP Messages: 
+	- Summary Advertisements 
+		- Every 5 minutes
+		- Or, Whenever there is a Change 
+		- Inform other switches of the current VTP Domain and Configuration revision number 
+	- Summary Request : 
+		- Switch has been reset 
+		- VTP Domain name has been change 
+		- Switch has received a VTP Summary advertisement with a higher configuration revision than its own. 
+	- Subset Advertisement : 
+		- Contains the list of VLAN information 
+		- if there are several VLANS, More than one subset advertisement may be required 
+
+VTP Modes : 
+	- Server (Default Mode) 
+		- create VLANS 
+		- Modify VLANS
+		- Delete VLANS 
+		- Send and Forward Advertisement 
+		- Synchronizes databases 
+	
+	- Client 
+		- cannot create, change, or delete VLANs 
+		- sends and forward advertisements 
+		- synchronizes Databases 
+	    
+Access Mode : An access port is a connection on a switch that transmits data to and from a specific VLAN. Because an access port is only assigned to a single VLAN, it sends and receives frames that aren’t tagged and only have the access VLAN value.
+
+Trunk Mode : Unlike an access port, a trunk port can transmit data from multiple VLANs. If you have a dozen VLANs on a particular switch, you don’t need additional cables or switches for each VLAN—just that single link. A trunk port allows you to send all those signals for each switch or router across a single trunk link.
+
 
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
