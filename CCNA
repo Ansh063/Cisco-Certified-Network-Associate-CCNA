@@ -342,8 +342,54 @@ Window Size :
 	it then slows down its growth , using an algorithm called congestion avoidance 
 
 In quality of Service Weighted random Early detetction or WRED can be used to increase efficiency of TCP transmission. 
- 
+ 	
+-------------------------------------------------------------------------------------------------------------------------------
+
+VLANs : Virtual LANs  
+
+1. VLAN Overview 
+2. 802.1Q and ISL 
+3. VTP
+
+Vlan is essentially a Single broadcast Domain or logical subnet or logical network or we can say that it's a group of hosts witha common set of requirements attached to the same boradcast Domain regardless of where they are present physically. 
+Able to group device logically not physically. 
+
+Vlan Advantages : 
+	
+1. Segmentation : Seperate user based on their function. 
+2. Flexibility : 
+3. Security : it also provide security because users are on seperate VLANs and they have to traverse a layer 3 device like a router from one vlan to another on the router you can also implement Access list to filter the traffic. 
+The Only way to move from one VLAN to another VLAN is to go via layer 3 device such as router. 
+
+Trunk Port : 
+A special type of link is required between the two switches so that they can communicate any information between them and that is known as trunk port. 
+
+Trunking : 
+Allows Multiple VLANs to traverse link.
+Interface will have to run a trunking protocol to excahnge any type of information. 
+The Two trunking protocol that are used are 
+	1; ISL : Inter Switch Link 
+	2: 802.1Q 
+ISL is a Cisco proriatory protocol 
+802.1Q is used for communicating VLAN information between switches across trunking port. 
+
+802.1Q  : 
+802.1Q one frame has a full byte tag inserted into the header between the source address field and the length field because the frame is being altered the FCS field is recomputed and replace in the modified frame. 
+
+VLAN number can be from 0 - 4096
+
+The tag consist of two main part : 	
+	- TPID : The tag protocol identifier 
+	- PRI : priority
+	- CFI : Canonical Format identifier used in old days in ethernet in token ring network 
+	- VLAN ID : 12 Bit field specifying the VLAN ID  
+
+Native VLAN : 
+Native Vlan is untagged when a port on a switch is setup as a trunk. frame belonging to the native vlan do not carry violent tags when sent over this trunk by the same point if an untagged frame were received on the trunk port the fram would automatically  	
 		
+	 		  	
+
+-------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
@@ -363,7 +409,12 @@ Router(Config)# service password-encryption : encrypt the clear text password
 Router(config)# enable secret [password] : it provide more security and it overrides the enable password
 router(config)# line vty 0 5 : To configure telnet
 router(config-line)# password cisco : set the password to telnet 
-      
+- Allow DHCP Server on Router : 
+ip dhcp pool network 101
+network 10.1.2.0 255.255.255.0
+default-router 10.1.1.254
+dns-server 10.1.2.254
+	      
 
 -------------------------------------------------------------------------------------------------------------------------------
 
