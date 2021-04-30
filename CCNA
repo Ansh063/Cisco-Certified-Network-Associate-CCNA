@@ -1,4 +1,5 @@
 
+
 Cisco Certified Network Associate - Notes : 
 
 -> IP is 32 bit Binary Number.
@@ -443,9 +444,42 @@ Access Mode : An access port is a connection on a switch that transmits data to 
 
 Trunk Mode : Unlike an access port, a trunk port can transmit data from multiple VLANs. If you have a dozen VLANs on a particular switch, you don’t need additional cables or switches for each VLAN—just that single link. A trunk port allows you to send all those signals for each switch or router across a single trunk link.
 
+-------------------------------------------------------------------------------------------------------------------------------
+
+Inter-VLANs : Whenever hosts in one VLAN need to communicate with hosts in another VLAN, the traffic must be routed between them. This is known as inter-VLAN routing
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+Dynamic Trunking Protocol : 
+	This allows switched to dynamically negotiate to forming of trunks. 
+	Cisco Propritary protocol 
+	use mannual configuration instead of using DTP 
+	It supports two mode : 
+		- Dynamic Auto 
+		- Dynamic Desirable 
+	Desirable means that the switch initiates the trunking with the remote end. 
+	Auto means that is doesn't negotiate but if the other side initiates the trunking, trunking will be formaed 
+	
+	auto auto  = access mode
+	auto desir = trunk 
+	desir auto = trunk 
+	desir desir= trunk 
+
+DTP packets are sent using 
+	ISL : when VLAN 1 is used 
+	802.1Q :DTP packets are sent over Native vlan. 
+
 -------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
 
 Cisco Packet Tracer Commands 
 
@@ -469,8 +503,23 @@ ip dhcp pool network 101
 network 10.1.2.0 255.255.255.0
 default-router 10.1.1.254
 dns-server 10.1.2.254
-	      
-
+!
+!
+do show vlan brief : Show all the vlans and the interfaces 
+vlan [number] : create a vlan 
+switchport mode access 
+switchport mode trunk 
+switchport mode dynamic desirable 
+switchport mode dynamic auto 
+switchport nonegotiate : to disable DTP 
+show interface [gig] switchport 
+core(config)# ip routing : this enable ip routing to allow switch to route from one SVI(switch virtual interface) to another  
+show vtp status : show the number of VLANs and many other details 
+!
+!
+!
+show dtp interface g0/0
+      
 -------------------------------------------------------------------------------------------------------------------------------
 
 -> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
