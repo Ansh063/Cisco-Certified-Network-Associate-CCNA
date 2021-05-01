@@ -471,6 +471,32 @@ DTP packets are sent using
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+Spanning Tree Protocols : 
+
+Spanning tree develop to stop layer 2 loop occurring in switch environment. 
+redundant links introduce loops. and Spanning tree is used stop those loops 
+spanning tree or (802.1D Spanning tree) 
+
+Rapid Spanning Tree : 
+Multiple Spanning Tree : 
+
+
+
+Different Types of Spanning Tree : 
+1. IEEE 802.1D (original) : The Legacy standard of Spanning Tree
+		  - CST : Assumes that there is one spanning tree instance for the entire bridged network.     	 
+2. PVST (Per Vlan Spanning Tree) : Only Supported ISL 
+   PVST+ : Support ISL and 802.1Q 
+	   Cisco Enhancement of spanning tree that provide a separate 802.1D Spanning Tree Instance. 
+3. Multiple Spanning Tree Protocol (MSTP) or 802.1S  ; Optimize PVST by mapping multiple VLANs to the same spanning tree instance 
+4. Rapid Spanning Tree protocol (RSTP) or 802.1W : It converges very quickly by adding roles to ports and Enhancing BPDU exchanges. Only supports a single instance of spanning tree 
+
+5. Rapid PVST+ : One Spanning tree instance per VLAN but have rapid convergence.    
+	   		 
+
+Need of Spanning Tree : 
+
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------------------------------------------------
