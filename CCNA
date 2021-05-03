@@ -493,11 +493,51 @@ Different Types of Spanning Tree :
 
 5. Rapid PVST+ : One Spanning tree instance per VLAN but have rapid convergence.    
 	   		 
-
-Need of Spanning Tree : 
-
-
 -------------------------------------------------------------------------------------------------------------------------------
+
+How Do Switch learn about each other ?? 
+BPDU (Bridge Protocol data unit) are sent out of all ports on switch on default every 2 seconds 
+If a switch get BPDU again and again it knows that the loop is formed. It receives the BPDU from the same switch on multiple ports 
+  
+BPDU : 
+	It contains : 
+	Bridge ID : a Spanning tree bridge ID is an 8 Byte unique value to the switch it Consist of 2 Byte Priority Field and the 6 Byte system ID (based on the MAC Address) 
+		    Consist of Priority of 32768 by default. 
+		    
+BPDU : 
+- Contains Information about spanning Tree 
+- Unique MAC Address 
+- MAC ( 1:80:C2:00:00:00 or 01:00:0C:CC:CC:CD for VLAN Spanning Tree )
+
+Types of BPDU : 
+
+1 : Configuration BPDU : 
+	- Used by Spanning Tree to Provide information to switch
+2 : Topology Change BPDU : 
+	- To tell switch of a change 
+3 : Acknowledgement BPDU : 
+	- use to confirm the receipt of a topology change in a notification. 
+
+BPDU is send in every 2 Seconds. 
+
+
+Root Bridge : The Switch having the Lowest Root ID
+Root Port (Role) : This is the port whose distance from root bridge is minimum. 
+Designated Port : Port which send traffic away from the root bridge.Root Bridge have all the port as designated port.  
+Broadcast Storm : when there is loop in a topology. 
+
+between two switches some port are in forwarding state(Designated) and some are in Blocking State. To determine the which switch port perform which role this will decide on : 
+	lowest cost to the Bridge Switch 
+	and if the cost is same then the next condition is the lowest bridge id.
+
+we cannot have to designated port on same segment  
+   
+Cost of gigabit links in spanning tree is 4 
+Bridge ID consists of { Priority + VLAN + BASE MAC_ADDR }
+
+Case : 
+if switch is connect twice with the root bridge then we acoording to us a switch have 2 root port but this is not possible then the root port will be the root Bridge's lowest port id. 
+
 
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -545,7 +585,18 @@ show vtp status : show the number of VLANs and many other details
 !
 !
 show dtp interface g0/0
-      
+!
+!
+!
+!
+show spanning-tree 
+show spanning-tree vlan <vlan_num> : show the spnning tree of Vlan
+!
+!
+Switch(Config) #spanning-tree vlan 10 root primary : this command force the router to be the root bridge. 
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 -> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
