@@ -561,8 +561,48 @@ PortFast :
 
 This will skip the Listening and Learning state of switch. 
 spanning-tree portfast default : this command enable portfast on the access port in the network.
+Cisco used the term : Port Fast 
+Other Vendor used the term : edge port
 
- 
+Port Fast on Acces ports: 
+	you shouldn't enable port fast on link between switches(Trunk Ports )
+		- Because this will introduce loops in your topology. 
+portfast : immediate transition to the forwarding state so, it bypass the listening and learning state. 
+		- It goes directly from blocking to the forwarding state. 
+
+quicker convergence : 
+	Rather than waiting for spanning tree o go through various stages : Blocking 
+									    Listening 
+									    Learning 
+									    Forwarding 
+	Spanning tree still running on that port but transition immediately to the forwarding state. 
+-------------------------------------------------------------------------------------------------------------------------------
+
+Rapid Spanning Tree : 802.1w : For Convergenge with single bridge Root.
+			       RSTP is not a timer based spanning tree protocol.  
+Rapid Per Vlan Spanning Tree : Fast Convergence with individual bridge root on different vlans.
+Multiple Spanning tree : 802.1s : It gives you ability to associate multiple VLANs to a Spanning Tree root.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Port Roles : 
+
+The Root Port and the Designated Port Remain the Same. The Blocked port role is now split into the backup and alternate port role.
+the STA determines the role of a port based on an examination of the Bridge Protocol Data unit (BPDUs) to decide whether one is 
+more useful than the other. The decision is based on the value stored in the bPDU to decide whether one is more useful than the 
+other. 
+
+
+Root Port : This is the port closest to the root bridge in terms of path cost. 
+Designated Port : This is the best port on a segment o use to get to the root bridge.
+Blocked Port : A block port is defined as any port that is not the designated or root port. A root port remina blocked as it receives the more usefull BPDU in order to stay blocked.
+
+Alternate Port : An Alternate port is port that is blocked because it is receiving more useful BPDU's from another bridge. 
+Backup Port : 
+  
+Alternate port—Acts as the backup port for a root port. When the root port is blocked, the alternate port takes over. 
+Backup port—Acts as the backup port of a designated port.
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 STP Load Balancing : 
@@ -571,12 +611,11 @@ All the traffic is being pass to the root bridge whether it is VLAN 10 or VLAN 2
 
 So we can divide the traffic by using VLAN i.e VLAN 10 traffic is pass via path1 and VALN 20 traffic is pass via path2
 
-like vlan 20 has another root bridge and vlan 10 has another root bridge. 
-
-
+like vlan 20 has another root bridge and vlan 10 has another root bridge.
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------------------
 
 
 Cisco Packet Tracer Commands 
