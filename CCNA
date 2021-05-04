@@ -538,10 +538,42 @@ Bridge ID consists of { Priority + VLAN + BASE MAC_ADDR }
 Case : 
 if switch is connect twice with the root bridge then we acoording to us a switch have 2 root port but this is not possible then the root port will be the root Bridge's lowest port id. 
 
+PVST + Extended Bridge ID : 
 
+When configuring multiple VLANs and running per VLAN Spanning Tree 
+	- Different MAC address would have to be allocated for every VLAN 
+PVST : 
+	- Creates a instance on a per vlan basis.
+	- The vendor would need to assign a unique mac address on a per vlan basis
+	- Few VLANs
+This is not scalable as we have to assign 4094 MAC addresses 
+
+So to conserve MAC Address the system has changed and an extended system id is also known as MAC address. 
+this technique is also know as MAC Address Reduction. 
+so with the extended bridge ID , the bridge ID is still 8 bytes in size but the priority is now split into two parts : 
+	two byte priority portion consist of a 4 bit bridge priority and a 12 bit extended system id. the mac address are still in 6 bytes. 
+
+Bridge ID : Bridge Priority (4 Bits)
+	    Extended System ID (12 Bits)
+	    MAC Address (48 Bit or 6 Byte) 
+-------------------------------------------------------------------------------------------------------------------------------
+PortFast : 
+
+This will skip the Listening and Learning state of switch. 
+spanning-tree portfast default : this command enable portfast on the access port in the network.
+
+ 
 -------------------------------------------------------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------------------------------------------------------
+STP Load Balancing : 
+
+All the traffic is being pass to the root bridge whether it is VLAN 10 or VLAN 20 So this will increase the loat on one switch because all other path is being blocked by the STP. 
+
+So we can divide the traffic by using VLAN i.e VLAN 10 traffic is pass via path1 and VALN 20 traffic is pass via path2
+
+like vlan 20 has another root bridge and vlan 10 has another root bridge. 
+
+
 
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -594,7 +626,19 @@ show spanning-tree vlan <vlan_num> : show the spnning tree of Vlan
 !
 !
 Switch(Config) #spanning-tree vlan 10 root primary : this command force the router to be the root bridge. 
-
+!
+!
+!
+configuring portfast 
+!
+int g0/0
+spanning-tree portfast
+!
+!
+show spanning-tree vlan 10 int gig 0/0 detail : this give you complete details of that port
+show spanning-tree vlan 10 summary 
+spanning-tree portfast default : all the access port now having port fast enabled
+ 
 
 
 -------------------------------------------------------------------------------------------------------------------------------
