@@ -583,9 +583,38 @@ Rapid Spanning Tree : 802.1w : For Convergenge with single bridge Root.
 Rapid Per Vlan Spanning Tree : Fast Convergence with individual bridge root on different vlans.
 Multiple Spanning tree : 802.1s : It gives you ability to associate multiple VLANs to a Spanning Tree root.
 
--------------------------------------------------------------------------------------------------------------------------------
+There are two types of link : 
+	Shared (shr) : Half Duplex
+	point to point (p2p) : Full Duplex
+Edge : this means that the portfast is enabled on the port. 
+	
+------------------------------------------------------------------------------------------------------------------------------e
+Port States : 
+
+	802.1D 		802.1W  	Cisco PVST+	Cisco Rapid PVST 
+
+	Disabled 	Discarding 		
+	Blocking 	Discarding	BLK		BLK
+	Listening 	Discarding	LIS		BLK 
+	Learning	Learning	LRN		LRN
+	Forwarding 	Forwarding 	FWD		FWD
+
+Spanning Tree Port Roles  :
+
+	802.1D		802.1W		Cisco PVST 	Cisco Rapid PVST 
+
+	Root		Root		Root		Root
+	Designated	Designated 	Desg		Desg
+			Alternate	Altn		Altn
+			Backup 		Back		Back
+
+------------------------------------------------------------------------------------------------------------------------------e
 
 Port Roles : 
+
+1. Root Switch
+2. Root Port (1 Per Switch)
+3. Designated Port (1 Per Segment)
 
 The Root Port and the Designated Port Remain the Same. The Blocked port role is now split into the backup and alternate port role.
 the STA determines the role of a port based on an examination of the Bridge Protocol Data unit (BPDUs) to decide whether one is 
@@ -615,7 +644,29 @@ like vlan 20 has another root bridge and vlan 10 has another root bridge.
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+BPDU Guard : 
+It is a multiple security Mechanism available in spanning tree.this will disable the port.
+This is useful on ports that are going to be used as access port and should never be connected to another switch. 
+
+Two ways to configure BPDU Guard : 
+	- Per Interface Basis
+		- spanning-tree portfast
+		- spanning-tree bpdu guard enabled
+
+	- Configure it Globally on the switch. 
+ 		command : spanning-tree portfast default 
+Note : By default, BPDU guard is disabled when you configure BPDU guard on interface that port doesn't have to be configured as 
+       portfast port. If any bpdu is received on that port it will be error disabled. 	
+
+
 -------------------------------------------------------------------------------------------------------------------------------
+
+Ethernet Channel : 
+
+
+------------------------------------------------------------------------------------------------------------------------------e
+------------------------------------------------------------------------------------------------------------------------------e
+------------------------------------------------------------------------------------------------------------------------------e
 
 
 Cisco Packet Tracer Commands 
