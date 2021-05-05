@@ -583,7 +583,7 @@ Rapid Spanning Tree : 802.1w : For Convergenge with single bridge Root.
 Rapid Per Vlan Spanning Tree : Fast Convergence with individual bridge root on different vlans.
 Multiple Spanning tree : 802.1s : It gives you ability to associate multiple VLANs to a Spanning Tree root.
 
-There are two types of link : 
+        LearningThere are two types of link : 
 	Shared (shr) : Half Duplex
 	point to point (p2p) : Full Duplex
 Edge : this means that the portfast is enabled on the port. 
@@ -661,6 +661,17 @@ Note : By default, BPDU guard is disabled when you configure BPDU guard on inter
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+Cisco Discovery Protocol : 
+
+Cisco Discovery Protocol (CDP) and the Industry standard version Link Layer Discovery Protocol 
+these are the protocols that runs on layer 2 in the OSI Model and allows you to discover how device are connected each other. 
+This runs independently of protocols such as IPv4, IPv6.
+CDP is Cisco Proprietory this will only discover other Cisco Devices. 
+CDP uses multicast frames ..... but doesn't rely on high level protocols. 
+CDP only shows you directly connected device. 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
 Ethernet Channel : 
 
 
@@ -728,7 +739,19 @@ spanning-tree portfast
 show spanning-tree vlan 10 int gig 0/0 detail : this give you complete details of that port
 show spanning-tree vlan 10 summary 
 spanning-tree portfast default : all the access port now having port fast enabled
- 
+!
+!
+! 
+show cdp neighbour : display the neighbour devices 
+!
+show cdp neighbour details 
+!
+show cdp entry <device_name> : Display the CDP entry 
+!
+show lldp neighbour 
+!
+show lldp neighbour details 
+!
 
 
 -------------------------------------------------------------------------------------------------------------------------------
