@@ -588,6 +588,9 @@ Multiple Spanning tree : 802.1s : It gives you ability to associate multiple VLA
 	point to point (p2p) : Full Duplex
 Edge : this means that the portfast is enabled on the port. 
 	
+RSTP and RPVST+ uses different destination MAC addresses: RSTP with multicast address : 0180.C200.0000 (Defined by IEEE std.)
+RPVST+ with multicast address : 0100.0CCC.CCCD (Chosen by Cisco).
+
 ------------------------------------------------------------------------------------------------------------------------------e
 Port States : 
 
@@ -673,12 +676,15 @@ CDP only shows you directly connected device.
 -------------------------------------------------------------------------------------------------------------------------------
 
 Ethernet Channel : 
+EtherChannel is a port link aggregation technology or port-channel architecture used primarily on Cisco switches. It allows grouping of several physical Ethernet links to create one logical Ethernet link for the purpose of providing fault-tolerance and high-speed links between switches, routers and servers.
+
+------------------------------------------------------------------------------------------------------------------------------e
+
 
 
 ------------------------------------------------------------------------------------------------------------------------------e
-------------------------------------------------------------------------------------------------------------------------------e
-------------------------------------------------------------------------------------------------------------------------------e
 
+------------------------------------------------------------------------------------------------------------------------------e
 
 Cisco Packet Tracer Commands 
 
