@@ -113,6 +113,9 @@ PART 2 - IMPORTANT :
 To find how many host supported on an subnet is = 2^n - 2
 	for example suppose a subnet is given as /24 this means that host has 8 bits = 2^8 - 2
 	
+Block Size : Mask Least Significant Bit 
+
+
 Subnetting : 
 it Involves : Stealing or taking away bits from the host portion of an address.  
 	      Allocating the stolen bit to the network portion of a new address. 
@@ -676,7 +679,25 @@ CDP only shows you directly connected device.
 -------------------------------------------------------------------------------------------------------------------------------
 
 Ethernet Channel : 
+
 EtherChannel is a port link aggregation technology or port-channel architecture used primarily on Cisco switches. It allows grouping of several physical Ethernet links to create one logical Ethernet link for the purpose of providing fault-tolerance and high-speed links between switches, routers and servers.
+
+Dynamic EtherChannels : 
+
+Cisco Proprietary Port Aggregation Protocol (PAgP) 
+IEEE standard Link Aggregation Control Protocol (LACP)
+
+LACP support Maximum of 16 channels 
+PAgP support 8 
+
+Desirable and auto : PAgP 
+Active and Pasive : LACP 
+
+The switch either use PAgP or LACP (if already in use) or use Cisco Discovery Protocol (CDP) if using manual configuration. When Checking neighbour, all settings except the STP setting must match. 
+
+Etherchannel Load Distribution Channel   
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------e
 
@@ -703,6 +724,10 @@ Router(Config)# service password-encryption : encrypt the clear text password
 Router(config)# enable secret [password] : it provide more security and it overrides the enable password
 router(config)# line vty 0 5 : To configure telnet
 router(config-line)# password cisco : set the password to telnet 
+!
+!
+
+!
 - Allow DHCP Server on Router : 
 ip dhcp pool network 101
 network 10.1.2.0 255.255.255.0
@@ -758,7 +783,37 @@ show lldp neighbour
 !
 show lldp neighbour details 
 !
-
+# configure Ethernet channels : 
+!
+interface gig0/1-4
+channel-group 1 mode on 
+!
+show etherchannel 1 summary 
+!
+# Dynamic Etherchannel : 
+!
+# PAgP : 
+!
+channel-group 1 mode desirable | auto 
+!
+# LACP 
+!
+channel-group 1 mode auto | passive 
+!
+# Confirmation for dynamic Etherchannel 
+!
+show etherchannel 1 port-channel 
+!
+# Etherchannel Load Balancing Methods : 
+!
+port-channel load-balance {method}
+!
+test etherchannel load-balance : this command ask the switch to consider some addresses or port and answer the question : which link would you use when forwarding a message with those port/address values.
+!
+show etherchannel load-balance 
+!
+test etherchannel load-balance interface po1 mac {mac_address} 
+!
 
 -------------------------------------------------------------------------------------------------------------------------------
 
