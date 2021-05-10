@@ -157,6 +157,12 @@ Last networ= 10.1.1.	1111		0000		10.1.1.240/28
 To find subnet = 2^n = 2^4 = 16
 To find host = 2^n -2  = 16-2 = 14
 
+-------------------------------------------------------------------------------------------------------------------------------
+
+VLSM ( Variable Length Subnet mask )
+
+-> First find how many subnet is required and how many host are required ?? 
+-> Figure out the network which required maximum number of hosts. 
 
 
 -------------------------------------------------------------------------------------------------------------------------------
