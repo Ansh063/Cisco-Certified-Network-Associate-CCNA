@@ -164,7 +164,6 @@ VLSM ( Variable Length Subnet mask )
 -> First find how many subnet is required and how many host are required ?? 
 -> Figure out the network which required maximum number of hosts. 
 
-
 -------------------------------------------------------------------------------------------------------------------------------
 
 Types of Communication : 
@@ -710,7 +709,23 @@ Etherchannel Load Distribution Channel
 
 ------------------------------------------------------------------------------------------------------------------------------e
 
+Cisco IOS and DNS : 
 
+commands in cmd
+
+1. C:\Windows\System32> ipconfig /displaydns : this command will display the cached dns information. 
+2. C:\windows\System32> ipconfig /flushdns : This command will flush all the entries in the dns. 
+3. C:\Windows\System32> ipconfig /? : This will display the help menu. 
+4. traceroute -d [ip_address] : -d is used for don't bother
+5. cisco command : this command stops lagging when we enter any rubbish eg. iusiufsdiuf
+	Core1(config) # no ip domain lookup
+	Stops Boradcast for DNS lookup 
+6. cisco command: Configure the DNS ip 
+	ip name-server [dns_server_ip]  
+7. cisco command : display all cache information about hosts 
+	show hosts 
+8. Cisco command : clear all cache information about hosts 
+	clear host * 
 
 ------------------------------------------------------------------------------------------------------------------------------e
 
