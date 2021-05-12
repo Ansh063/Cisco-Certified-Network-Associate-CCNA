@@ -779,9 +779,144 @@ Static Routes :
 -> Administrator manually enters the route - no overhead on network 
 -> Manually update route require when a topology change 
 -> Default gateway is the static route ..... when a router don't have path to forward a packet the router forward that packet to default dateway.
+-> ip route 0.0.0.0 0.0.0.0 192.168.0.1 : configuring default route.
+
+Dynamic Routes : 
+-> Uses a Routing Protocols 
+-> Automatically adjusts based on topology changes or traffic changes. 
+-> exchange network information with each other.
+-> learn and maintain routes by exchanging routing updates. 
+
+Note : Generally today we are going to use either OSPF or EIGRP in most enterprise network.
+
+EIGRP : It is a popular routing protocol when we have only cisco devices only. EIGRP is a CIsCO prorietary Cisco routing protocol. 
+OSPF is a industry standard routing protocol. and is good to use when you have multi vendor devices.
+  
+Some Important Terms : 
+
+1. Autonomous System (AS) : It is a grouping of networks under a single administrative domain 
+2. Interior gateway Protocol (IGP) : Used within a Autonomous system ex. RIP, OSPF, EIGRP. 
+3. Exterior Gateway protocol (EGP) : Used between two autonomous systems. ex. BGP (Border gateway Protocol)
+
+# Autonomous System Number : 
+
+-> with in an AS no need to register or apply for a Autonomous System Number. 
+-> when communicating to the internet we have to register or apply for a Autonomous System Number. 
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+# Types of Routing Protocols : 
+
+1. Distance Vector : 
+	-> Also known as Routing by rumor. 
+	-> Determine the direction and distance to the destination. 
+	-> the direction is also known as vector and the distance such as hop count is determined to any destination in the 
+	   network. 
+	-> Router advertises routes as a vector of distance and direction 
+		- Direction : next hop address 
+		- Distance : uses a metric such as hop count 
+	-> very Limited visibility ( Disadvantage )
+	-> uses bellman-ford algorithm 
+
+2. Link State Routing Protocol : 
+	-> have a complete map of area ( Visibility )  
+	-> Can make a much more informed decision about how to get to the destination network.
+	-> Each Router Originate information about itself, its directly connected links and the state of those links. 
+	-> Uses an algorithm Shortest Path First. 
+	-> example OSPF, IS-IS
+	-> Difficult to Configure ( Disadvantages )
+	-> Require More Enery and Power.
+	
+	-> Floods the network with Link State Advertisement(LSA), Thus information about the entire network is received by the 
+	   all the routers in that network and area. 
+	-> Populate a Topological Database : which is the database that's the same on all the routers within an area. 
+
+OSPF Hierarchy : Link state routing protocol such as OSPF allow for the division of large autonomous system into smaller 
+		 grouping called areas. 
+Internal Router : Router which are only part of single area. 
+Autonomous system border router : As it connects two area 
+Backbone area : this is the area which is connected to all the area. information from one area has to traverse to another area 
+		from the Backbone area. 
+
+Benefits of Link state routing protocol : 
+	-> fast convergence
+		-> changes reported immediately
+	-> Robustness against routing loops
+		-> Router Know topology 
+		-> link state packets are sequenced and acknowledged 
+	-> Hirarchical Design enables optimization of resources. 
+	-> can scale to much larger environments than distance vector routing protocol. 
+
+Drawbacks of Link state Routing protocol : 
+	-> Significanet Demand of Resources 
+		-> Memory - LSDB (Link State Database), forwarding table.  
+		-> CPU 
+	-> Requires strict design
+	-> Configuration and design is more complex  
+  	
+
+3. Advanced Distance Vector : 
+	
+Enhanced Interior Gateway Routing Protocol (EIGRP) : Takes the best of both link state routing protocol and Distance vector protocol. 
+also known as the Hybrid routing protocol. 
+Cisco Proprietary.
+
+
+Administrative Distance : 
+
+	-> Believability factor of a route. 
+	-> who will you believe ? ex. if OSPF says go left and EIGRP says go right where will the packet go ?? 
+	-> Administrative distance is then used as a tie breaker to determine which way to go 
+	-> Routing protocol with the lowest administative distance is more acceptable, and this info is added to RIB 
+	
+Administrative distance table : 
+	connected interface 	0 	Lowest administrative distance means highest believability factor range (0-255)
+	Static Route 		1 	
+	Internal EIGRP 		90
+	OSPF 			110
+	RIP			120
+	Unknown 		255
+------------------------------------------------------------------------------------------------------------------------------
+
+Classful vs Classless Routing Protocol : 
+
+# Classful Routing Protocol : 
+	-> Do not Advertise the Subnet mask.
+	-> They would advertise network 
+	-> They assume that everyone is using the same subnet mask  
+	-> Summarize route across classful boundaries.
+	-> ex. RIP version1 and IGRP
+
+# Classless Routing Protocol : 
+	-> Do advertise subnet mask. 
+	-> It also supports VLSM (Variable Lenth Subnet mask)
+
+NOTE : Longest Prefix match take precidence over Administrative Distance.
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Routing tables : 
+
+- Is a list of networks that the router knows about 
+- information about how to reach those network. 
+
+Directly connected networks 
+	- Added to the routing tables automatically
+	- Directly connected to one of the interfaces to the local router.  
+
+Static Routes : 
+	- Manually added to the configuration of the router. 
+	- very good for small simple network. 
+	- Do not dynamically adjust to changes in  network topology.
+	command : 
+	ip route <destination_ip> <subnet_mask> <next_hop_ip_address> 
+
+Default route : 
+	- Optional Route : That is used when no explicit path to a destination is found in the routing table. 
+	command : 
+	ip route 0.0.0.0 0.0.0.0 <next_hop_ip_address>
+
+------------------------------------------------------------------------------------------------------------------------------
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
