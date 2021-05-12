@@ -729,7 +729,58 @@ commands in cmd
 
 ------------------------------------------------------------------------------------------------------------------------------e
 
-------------------------------------------------------------------------------------------------------------------------------e
+Dynamic Arp Inspection ( DAI ) : 
+
+DAI is used when there is ARP Spoofing Attack. 
+command: 
+	-> ip arp inspection vlan [vlan_id] 
+	-> show ip arp inspection vlan {vlan_id}
+How would the switch know that this is the correct mac address attached to this IP address ?? 
+Ans : Using DHCP snooping. It listenes for DHCP messages and it will dynamically build a table having a IP address and the Layer 2 Address. 
+and for the device that is not a DHCP client we have to manually map the addresses. 
+
+Implementing DHCP snooping : 
+
+	-> show ip dhcp snooping binding 
+Note : When the device is not in the binding table first we need to make that port as a trusted port then we apply DAI. 
+	-> ip arp inspection trust
+	-> ip arp inspection vlan {vlan_id}
+------------------------------------------------------------------------------------------------------------------------------
+
+Routing information : 
+
+1. Routed vs Routing Protocol 
+2. Static vs Dynamic Protocol 
+3. DIstance vector Routing protocol 
+4. Link state routing protocol. 
+
+# Routed vc Routing Protocol : 
+
+Routed : 
+-> Routed protocol carries user data. ex IPv4, IPv6
+-> Each Router making a independent decision in determining path 
+-> routed protocols are independent on one another.
+
+Routing Protocols : 
+-> EIGRP, OSPF, RIP, ISIS, BGP etc
+-> Communicate Information about networks
+-> Determine the best route between networks.
+ex. 
+RIP uses HOP COUNT
+OSPF uses BANDWIDTH 
+EIGRP uses BANDWITH and DELAY to determine the best path. 
+-> Routing Protocols are used to automatically advertise the networks between routers.
+
+There are two main ways that we can add routes to the routing tables: 
+1. Static 
+2. Dynamic 
+
+Static Routes : 
+-> Administrator manually enters the route - no overhead on network 
+-> Manually update route require when a topology change 
+-> Default gateway is the static route ..... when a router don't have path to forward a packet the router forward that packet to default dateway.
+
+------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
 
