@@ -878,6 +878,20 @@ Administrative distance table :
 	Unknown 		255
 ------------------------------------------------------------------------------------------------------------------------------
 
+Switch Virtual Interfaces (SVIs) :
+
+which is a logical layer 3 interface on a cisco router that has a switch module in it. 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Router on a stick : 
+Router on a stick or external router that's connected to allow you to switch that perform the inter VLAN routing to allow device
+in one VLAN to communicate with device in another VLAN. 
+
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+
 Classful vs Classless Routing Protocol : 
 
 # Classful Routing Protocol : 
