@@ -1,0 +1,12 @@
+
+
+
+  Vlans 			Range 			Ussage 				
+  
+   1   				Normal 			Cisco Default, you can use this VLAN but cannot Delete it.  
+   2 - 1001			Normal			For Ethernet VLANs, you can create, delete these vlans
+   1002 - 1005 			Normal 			Cisco Default for FDDI and Token Ring. You cannot delete VLANs 1002-1005   1006 - 4094 			Extended		For Ethernet VLANs Only. 
+
+  
+
+

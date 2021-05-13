@@ -881,12 +881,32 @@ Administrative distance table :
 Switch Virtual Interfaces (SVIs) :
 
 which is a logical layer 3 interface on a cisco router that has a switch module in it. 
+switch(config) # int vlan 10 
+this is the Switch virtual interface 
 
+------------------------------------------------------------------------------------------------------------------------------
+
+Inter-VLAN Routing using a Multi layer switch : 
+
+Multi layer switch it has the ability to route between two different networks it has layer 3 interfaces like gig 1/2 and 1/2
+Interface like VLAN00010 and VLAN00020 are called as Switch Virtual Interface. 
+Logical Layer 3 Interfaces is also called as Switch Virual Interfaces.  
+ 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Router on a stick : 
 Router on a stick or external router that's connected to allow you to switch that perform the inter VLAN routing to allow device
 in one VLAN to communicate with device in another VLAN. 
+if a one VLAN want to talk to another VLAN then it need to router who can route these packets. 
+Why there is need of virual interfaces ?? 
+Suppose that we have 100 vlans for routing we need 100 physical port which is not possible for router so that's why we use single
+physical port and divide that port into virtual interfaces.
+
+int gig 0/1.10
+encapsulation dot1q [vlan_id]
+ip address [ip_address] [subnetmask]
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------
