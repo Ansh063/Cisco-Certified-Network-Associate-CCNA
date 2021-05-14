@@ -895,6 +895,7 @@ Logical Layer 3 Interfaces is also called as Switch Virual Interfaces.
 ------------------------------------------------------------------------------------------------------------------------------
 
 Router on a stick : 
+
 Router on a stick or external router that's connected to allow you to switch that perform the inter VLAN routing to allow device
 in one VLAN to communicate with device in another VLAN. 
 if a one VLAN want to talk to another VLAN then it need to router who can route these packets. 
@@ -905,8 +906,6 @@ physical port and divide that port into virtual interfaces.
 int gig 0/1.10
 encapsulation dot1q [vlan_id]
 ip address [ip_address] [subnetmask]
-
-
 
 ------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------
@@ -950,7 +949,13 @@ Default route :
 	command : 
 	ip route 0.0.0.0 0.0.0.0 <next_hop_ip_address>
 
+# Default Gateways vs Default Route : 
+
+Default Route is Indicated by 0.0.0.0 
+The default route is the destination that a packet is sent to if the router doesn't have instructions to send it somewhere else.The default-route is used on routers, while the default gateway is used on hosts. As an example, consider a simple home router that connects your home network to the Internet
+
 ------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
