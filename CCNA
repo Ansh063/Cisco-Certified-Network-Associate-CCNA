@@ -975,7 +975,22 @@ R1# show ip dhcp pool
 An Address pool in Cisco terminology is very similar to a scope 
 
 1. DHCP Discover : Client sends a broadcast message 255.255.255.255 trying to discover DHCP Servers on the network 
+2. DHCP Offer :  Then DHCP server offers an ip address to the client 
+3. DHCP Request : The Client will then request one of those ip addresses
+4. DHCP Acknowledge : Then the DHCP server will acknowledge that request. 
 
+NOTE : We also need to configure what's called an IP Helper address to forward DHCP requests to the router. 
+      	S1(config)# interface vlan <vlan_id>
+	S1(config-if)# ip helper-address <ip_address>
+       We also need to configure static route from router to switch : 
+	command : 
+	R1(config)# ip 10.1.10.0 255.255.255.0 10.1.1.1
+	R1(config)# ip 10.1.20.0 255.255.255.0 10.1.1.1
+
+NOTE : DHCP message is Dropped by the router nad the layer 3 switch so we need a ip helper address 
+	ip helper-address <ip_address>
+	  		 
+ 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
