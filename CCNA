@@ -954,6 +954,28 @@ Default route :
 Default Route is Indicated by 0.0.0.0 
 The default route is the destination that a packet is sent to if the router doesn't have instructions to send it somewhere else.The default-route is used on routers, while the default gateway is used on hosts. As an example, consider a simple home router that connects your home network to the Internet
 
+Note : If you have IP route enabled you don't use the default-gateway command. 
+command : no ip routing 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+DHCP (Dynamic Host Configuration Protocol )
+
+Commands : 
+R1# show ip dhcp binding 
+R1(config)# ip dhcp pool <poolname>
+R1(dhcp-config)# network 10.10.10.1 255.255.255.0
+R1(dhcp-config)# default-router 10.1.1.254
+R1(dhcp-config)# 10.1.1.254
+R1(dhcp-config)# lease <number_of_days / infinite> 
+R1(dhcp-config)# domain-name davidbombal.com
+R1(config)# ip dhcp excluded-address <ip_address>
+R1# show ip dhcp pool 
+  
+An Address pool in Cisco terminology is very similar to a scope 
+
+1. DHCP Discover : Client sends a broadcast message 255.255.255.255 trying to discover DHCP Servers on the network 
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
