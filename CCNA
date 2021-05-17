@@ -163,7 +163,47 @@ VLSM ( Variable Length Subnet mask )
 
 -> First find how many subnet is required and how many host are required ?? 
 -> Figure out the network which required maximum number of hosts. 
+-> /30 support only 2 address suitable for WAN 
 
+Advantages of VLSM : 
+
+More Efficient use of IP address 
+Fewer updates 
+HIde Topology Changes 
+Hierarchical Level for better route summarization 
+
+Classful Routing : 
+
+-> Classful Routing protocols do NOT include the subnet mask with the network in routing advertisements.
+-> within the same network, consistency of the subnet mask is assumed (same subnet mask for entire network).
+-> summary routes are exchanged when crossing a classful routing.  
+Example : 
+	1. RIPv1
+	2. IGRP 
+
+Classless Routing : 
+
+-> Classless Routing Protocols DO include the subnet mask with the network in routing advertisement
+-> Support VLSM 
+-> Summary Routes can be manually configured  
+NOTE : EIGRP and RIPv2 act as a classfull by DEFAULT.  
+	-> these two protocols are classless protocols but by default they behave like a Classless protocol.
+	-> use the "no auto-summary" command to change the default behaviour. 
+
+Examples : 
+	1. RIPv2
+	2. EIGRP 
+	3. OSPF
+	4. ISIS
+
+Automatic Summaization : 
+
+	1. RIPv2
+	2. EIGRP
+	3. RIPv1
+	4. IGRP
+occurs across classful boundaries 
+	-> A / B / C
 -------------------------------------------------------------------------------------------------------------------------------
 
 Types of Communication : 
@@ -871,11 +911,13 @@ Administrative Distance :
 	
 Administrative distance table : 
 	connected interface 	0 	Lowest administrative distance means highest believability factor range (0-255)
+
 	Static Route 		1 	
 	Internal EIGRP 		90
 	OSPF 			110
 	RIP			120
 	Unknown 		255
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Switch Virtual Interfaces (SVIs) :
