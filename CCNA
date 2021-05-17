@@ -990,6 +990,22 @@ NOTE : We also need to configure what's called an IP Helper address to forward D
 NOTE : DHCP message is Dropped by the router nad the layer 3 switch so we need a ip helper address 
 	ip helper-address <ip_address>
 	  		 
+------------------------------------------------------------------------------------------------------------------------------
+
+Domain Name System (DNS) : 
+
+It essentially resolving a domain name to an IP Address.
+
+A Record is a record in Domain name in IPv4.
+AAA Record is a record in Domain name in IPv6.
+
+NOTE : Some Server will not allow you to connect directly on the IP address , That's typically because multiple Domains are 
+hosted on a single IP address. 
+
+Port numbers are assign in various ways, based on there ranges : 
+System Port = 0 - 1023 
+User Port = 1024 - 49252
+Dynamic / Private / Random and Ephemeral Port = 49152 - 65535 
  
 ------------------------------------------------------------------------------------------------------------------------------
 
