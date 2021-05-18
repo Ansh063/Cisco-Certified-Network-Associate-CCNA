@@ -1198,7 +1198,98 @@ DIN WE CAE
 logging synchronous : if this command is enables this means that in between when we are typing and command if any syslog
 comes our command will be copy to as it is to the terminal. we need to press the tab key. 
 
+To stop complete logging use : no logging console 
 
+------------------------------------------------------------------------------------------------------------------------------
+
+Cisco Router Components :  
+
+1. Cisco Router the entire cisco ios software into ram during the boot process 
+2. The running configuration is stored in RAM 
+3. NVRAM or Non Volatile Ram is used to store information such as the start-up config 
+command to copy all changes : 
+-> copy running config start-up config 
+
+ROM : 
+	- contains micro code for basic function to start and maintain the router 
+	- Bootstrap code 
+ROM also contain ROM Monitor which is used for password recovery and router disaster recovery functions 
+- NON VOLATILE 
+- IP Routing table : contains directly connect or remote connected paths 
+
+ARP cache : 
+	IPv4 to mac address mapping 
+Packet Buffers : when the packet are received on the interfaces before they exit interface.
+If an interface is congested the buffer of the outgoing interface will fill up with packets in the queue to be processed 
+out of an interface. 
+
+Configuration Register : This store the information how a router boots 
+
+	
+# Power on Self Test : 
+	- Test the Basic Functionality of the Router Hardware 
+	- working 
+	- supported 
+	- which component are present 
+# ROM Monitor : 
+	- Low level Operating system 
+	- Troubleshoot 
+	- Password Recovery 
+	- Testing 
+	
+Router Demo Commands : 
+
+1. show version
+2. show flash 
+3. show running config | redirect flash:/showrunning.cfg
+   this command will create a flash and copy the running config into it 
+4. more flash:/showrunning.cfg 	
+   this command will print the content of the showrunning.cfg 
+5. show startup-config 
+   display the stored configuration in the NV ram 
+6. erase startup-config
+7. copy running config start-up config
+
+
+Configuration Registers : 
+
+The configuration register contains different options one of them determine how router boots(Router Behaviour). 
+Configuration Register is a 16 Bit number 
+
+show version 
+Configuration register default value is 0x2102
+
+Last value or the Least significant 4 Bits of the configuration register is called boot field and this value determine how the router boots up 
+
+To change the configuration value of register run : 
+R1(config)# config-register 0x2100 
+Now it will boots up in ROM monitor Mode. 
+
+rommon 2 > confreg 0x2102 
+conifiguration register value of 0x2142 is used for password recovery. It will ignore NVRAM content. 
+
+Some Important Configuration Register Value : 
+
+0x2102 : Normal Bootsup 
+0x2100 : Boots in ROM Monitor mode 
+0x2142 : Bypass startup configuration file (Ignore NVRAM)
+0x2101 : Boot into RxBoot if supported 
+	 On all the Cisco Routers they had a mini ios called Rx Boot. 
+	 Router will boots using the first OS in the flash 
+
+# Boot Field and software, Router Boot process : 
+
+-> Steps that the router takes when booting up : 
+	1. Perform POST (Power on self test) 
+		- Series of hardware tests that verifies that all the cisco router are functional 
+		- Executes from Microcode 
+		- The Router then load and runs the bootstrap code 
+			- Locating the cisco ios software 
+			- Loading it into RAM and Running it 
+		- Loaded and running the bootstrap code 
+	Remaining in Udemy Notes 
+			 
+ 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
