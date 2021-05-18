@@ -912,11 +912,18 @@ Administrative Distance :
 Administrative distance table : 
 	connected interface 	0 	Lowest administrative distance means highest believability factor range (0-255)
 
-	Static Route 		1 	
+	Static Route 		1 
+	BGP 			20
+	EBGP 			20
+	IBGP 			200	
 	Internal EIGRP 		90
 	OSPF 			110
 	RIP			120
 	Unknown 		255
+
+RIB Failure : rib failure from "show ip bgp" indicate that a route is learned from a neighbour where a lower administrative 
+distance has already been installed into the routing table, thus the BGP route is Failed to install into the IP Table(RIB) 
+because it has been trumped by a lower admin.   
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -949,8 +956,6 @@ int gig 0/1.10
 encapsulation dot1q [vlan_id]
 ip address [ip_address] [subnetmask]
 
-------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------
 
 Classful vs Classless Routing Protocol : 
@@ -998,6 +1003,46 @@ The default route is the destination that a packet is sent to if the router does
 
 Note : If you have IP route enabled you don't use the default-gateway command. 
 command : no ip routing 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Network Time Protocol (NTP) : 
+
+NTP is used for synchronization of time. 
+NTP uses a hierarchical, Semi-layered system of time sources 
+Each level of hierarchy is termed as "stratum" and is assigned a number starting with zero at the top.
+uses a protocol UDP with a port number 123.
+
+Points to remember : 
+
+-> client adjust their time from what they hear from an NTP server 
+-> NTP server supply time to clients. 
+-> NTP need a trusted Source clock source 
+	ex. Domain controller in your network or NTP server on internet. 
+Stratum Level : 
+	Defines the quality of the time source. 	
+	The lower the number the better the time source. 
+		
+
+commands : 
+
+Configure NTP Server : 
+
+R1(config)# clock timezone GMT 0 0
+R1(config)# clock summer-time british_summer recurring last Sun Mar 1:00 last Sun Oct 1:00
+R1# clock set 23:19:10 16 August 2016 
+R1# show clock 
+R1(config)# ntp master 10  : this means that this is the trusted source for time 
+R1(config)# ntp source loopback 0 
+R1# show ntp associations
+R1# show ntp status 
+R2(config)# ntp server <R1_loopback_addr>
+  
+Configure Syslog server : 
+
+Syslog allows us to centralize log messages as well as store a historical backups of various log messages. 
+
+R1(config)# logging host <syslog_server_ip_address>
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -1049,6 +1094,111 @@ System Port = 0 - 1023
 User Port = 1024 - 49252
 Dynamic / Private / Random and Ephemeral Port = 49152 - 65535 
  
+------------------------------------------------------------------------------------------------------------------------------
+
+Port SPAN (Mirroring) : SPAN : Switch Port Analyzer 
+
+Port Mirroring, also known as SPAN (Switched Port Analyzer), is a method of monitoring network traffic. With port mirroring enabled, the switch sends a copy of all network packets seen on one port (or an entire VLAN) to another port, where the packet can be analyzed.
+
+Configuration : 
+
+Switch1(config)# monitor session <span_session_number> source vlan1 both 
+Switch1(config)# monitor session <span_session_number> destination interface fastethernet 1/0/5
+
+To remove the monitor session : 
+Switch1(config)# no monitor session <span_session_number>
+ 
+both is used for sent and receive 
+
+show monitor 
+
+NOTE : 
+
+When you enable span on a switch , the switch no longer leans mac addresses on the span destination port. 
+It also doesn't allow to be received traffic from that port.
+
+To configure switch so that it can receive data from span port 
+Switch1(config)# monitor session 1 destination interface fastEthernet 1/0/5 ingress untagged vlan 1 
+
+another configuration example : 
+
+Switch(config)# monitor session 1 source interface fastEtnernet 1/0/3 rx 
+Switch(config)# monitor session 1 destination interface fastEthernet 1/0/5 
+
+Dependencies and Rules with SPAN : 
+
+1. A SPAN destination can only be used with one span session at a time.
+2. A SPAN destination port can also be not a span source port 
+3. Multiple SPAN sources can be used with a single SPAN session 
+4. One SPAN Session
+	: cannot mix interfaces and VLAN Sources 
+	: Can use any combination of direction 
+5. Etherchannel : 
+	: Can be used as a source port in port mirroring / SPAN 
+6. Trunks : 
+	: Source Port 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Network Management Protocols : 
+
+Performance Monitoring : 
+
+ICMP/Ping : 1. Availability calculation 
+	    2. Latency response time 
+SNMP 	  : 1. Used in all other statistics 
+Windows System : WMI (Windows Management Instrumentation )
+		- check for performance counter type values 
+		
+SNMP uses a UDP protocol PORT 161 
+
+Configuring router with SNMP : 
+
+Router(config)# snmp-server community public ro 
+Router(config)# snmp-server community private rw 
+
+Now we can use the PC and open a MIB Browser and we can fetch all the information about connected devices 
+ 
+# Management Information Base (MIB) : 
+-> MIB is a large entitiy 
+-> MIB is a Database use for managing entities in a network  using protocol such as SNMP 
+-> Object in the MIB is defined by ASN(Abstract Syntax Notation)
+-> Tree Structure 
+-> Each Entry in the MIB is referenced by an OID
+
+
+# Object Identifiers (OID) : 
+-> OID is included in MIB 
+-> Used for polling a specific interface with a specific object identifier
+
+
+# Performance Counter : 
+-> Windows performance counter are commonly used when tracking data on a window system.
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Syslog : 
+
+Some commands : 
+
+1. R1# show logging 
+2. R1(config)# logging console <0-7> 
+
+0 - Emergency : system is unusable 
+1 - Alert : action must be taken immediately 
+2 - Critical : Critical Condition 
+3 - Error : error connection 
+4 - Warning : Warning condition 
+5 - Notice : Normal but significant condition 
+6 - Informational : information Message
+7 - Debug : debug-level message  
+
+DIN WE CAE
+
+logging synchronous : if this command is enables this means that in between when we are typing and command if any syslog
+comes our command will be copy to as it is to the terminal. we need to press the tab key. 
+
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
