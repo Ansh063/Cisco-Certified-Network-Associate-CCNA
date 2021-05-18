@@ -1289,6 +1289,11 @@ Some Important Configuration Register Value :
 		- Loaded and running the bootstrap code 
 	Remaining in Udemy Notes 
 			 
+# Cisco IOS : 
+
+The Cisco IOS is a single file that router will oad into RAM when it boots up typically from flash.
+Cisco IOS Provides a feature called the Cisco iOS integrated file System or CISCO IEFS, This system allows you to create, Navigate, and manipulate directories on a cisco device. 
+ 
  
 ------------------------------------------------------------------------------------------------------------------------------
 
