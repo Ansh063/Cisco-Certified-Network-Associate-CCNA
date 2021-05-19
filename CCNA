@@ -1293,8 +1293,44 @@ Some Important Configuration Register Value :
 
 The Cisco IOS is a single file that router will oad into RAM when it boots up typically from flash.
 Cisco IOS Provides a feature called the Cisco iOS integrated file System or CISCO IEFS, This system allows you to create, Navigate, and manipulate directories on a cisco device. 
+
+R1# show file systems 
+Show running config command : Running config found in system 
+show start-up config command : start-up config found in NVRAM 
+show flash command : Refer to the default file system flash0
  
- 
+
+# backup IOS to TFTP server : 
+
+Commands : 
+1. show flash 
+2. copy flash:?
+3. copy flash:<flash_name> tftp:
+	This command automatically find the tftp server and start the copy process 
+
+
+# Getting file from tftp server to the cisco router : 
+comamnds : 
+1. copy tftp: flash: 
+2. then enter the tftp server ip address 
+3. enter the ios file name ending with .bin extension	 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Password Recovery : 
+
+configuration register value be 0x2142
+Password recovery requires: (1) Power Cycle (2) Console access 
+
+1. right click on the router when the router is booting up and click on break, Now we are in rommon mode 
+2. rommon 1 > confreg 0x2142
+3. rommon > reset 
+4. now we can use the "enable" command 
+5. show start-up config
+6. copy start-up config running config
+7. now change the password 
+8. change the configuration register back to 0x2102 : configure-register 0x2102
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
@@ -1410,16 +1446,3 @@ test etherchannel load-balance interface po1 mac {mac_address}
 -> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
 -> Privilege EXEC (also called enable mode / mode like root ) or administrative mode prompt : Switch#
  
-
-
-
-
-
-
-
-
-
-Nahi Aata : 
-
-1. How to find collision domains and Broadcast Domains 
-
