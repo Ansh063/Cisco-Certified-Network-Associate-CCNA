@@ -1333,6 +1333,103 @@ Password recovery requires: (1) Power Cycle (2) Console access
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+# Infrastructure Security : 
+ 
+
+#1 Enable and Secret Password : 
+
+R1(config)# enable password <password>
+R1(config)# service password-encryption 
+This command stores the password in clear text so it is not recommended to use this command.
+
+R1(config)# enable secret <password>
+This command store the MD5 hash of the entered password. 
+
+NOTE password and secret password cannot be same !! 
+
+#2 Disable services :
+
+Disable the unused services. 
+It Reduces the Attack area of the network devices. 
+
+GNS3 R1# show control-plane host open-ports
+	this command list all the ports and services that are listening on that ports
+
+ 
+#3 Disable CDP : 
+
+Disable the CDP on the internet facing devices.
+R1(config)# no cdp run 
+
+#4 Line Console Security : 
+
+We can also enable password on console line 
+commands : 
+config terminal 
+line 0
+password <password>
+end
+
+line console 0 
+login local 
+
+#5 Telnet Security : 
+
+Configuration of Telnet -> 
+R1# config Terminal 
+R1(config)# line vty 0 5 
+R1(config-line)# password <password>
+or 
+R1(config-line)# login local
+or 
+R1(config-line)# secret <password>
+
+Note : Telnet send the data in unencrypted form.
+
+# 6 Sessions and lines : 
+
+Router# show users 
+to start a new session on any router use : ctrl+shift+6+x
+Router# show line 
+Router# clear line tty <tty_number>
+show session 
+directly input the session number to interact 
+disconnect <session_number>
+
+#7 SSH : 
+
+configuring ssh 
+1. hostname must be different from default one like router and switch 
+	-> hostname R
+2. R(config)# ip domain-name cisco.com 
+3. R(config)# username <username>  
+4. R(config)# password or secret <password>
+5. R(config)# crypto key generate rsa -> the router will generate a private and a public key 
+6. R(config)# line vty 0 6 
+7. R(config-line)# transport input ssh
+8. R(config-line)# login local 
+
+Now to login from the another router run 
+R1# ssh -l <username> {IP_address}
+
+#8 Banners : 
+
+Banner is allow to display text when a user is connected to a cisco router or switch.
+
+MOTD (Message of the Day) Banner :
+To Display a tempporary message
+
+LOGIN Banner : 
+Is shown before the user logs in 
+
+EXEC Banner : 
+To Display information that only internal staff should know 
+
+command : 
+Router(config)# Banner # ******* BANNER ********* # 
+	 
+------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
