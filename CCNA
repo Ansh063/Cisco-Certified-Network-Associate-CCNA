@@ -1451,6 +1451,77 @@ Router(config)# Banner # ******* BANNER ********* #
 	 
 ------------------------------------------------------------------------------------------------------------------------------
 
+# Port Security 
+
+Provide a level of authentication 
+What port security does ?? 
+It looks at the source mac address of frames received on the port and you can restrict the frames allowed on a specific port 
+to either a single mac address or to a limited number of MAC addresses that are dynamically learned.
+
+This is not use authentication : 
+
+Only frames from specific MAC addresses are allowed. 
+Limited Number of MAC addresses are permitted. 
+connecting to a port that they are not authorized to connect to Stopping a user connecting a hub or a Wireless access point 
+to the network.
+
+There are several ways through which mac Addresses can be learnt : 
+
+1. Static : Statically configure specific MAC addresses that are allowed or permitted on a port.
+	Advantage : A lot of control
+	Disadvantages : Manually Workout what the MAC addressess are 
+2. Dynamically Learnt : How Many MAC addressess are permitted on a port 
+			To limit the MAC Addressess Permitted but not which MAC Addressess are Permitted. 
+3. Sticky Learning : Automatically add a learnt MAC address to the running configuration of the switch 
+
+Port Security : 	
+	- Limit the number of MAC address permitted on the port 
+	- Specify which mac address are permitted on a port 
+	- Option of permitting two mac addressess on a port 
+	- That would stop user bringing access point or home router 
+
+configuration of port security on switch :   
+*****************************************
+S1(config-if)# switchport mode access
+S1(config-if)# switchport port-security 
+S1# show port-security address 
+S1# show port-security interface <innterface_id>
+*****************************************
+
+Configuring mac address statically : 
+*****************************************
+S1(Config)# interface <interface_name>
+S1(Config-if)# switchport port-security maximum <1 - 4097>
+S1(config-if)# switchport port-security mac-address <mac_address>
+S1(Config-if)# switchport port-security violation <Protect, Restrict, Shutdown>
+S1(config-if)# do show interface status 
+S1(config-if)# do show port-security interface <interface_id>
+S1# show port-security address 
+*****************************************
+1. Protect Mode : Drops Packets with unknown source MAC addressess until you remove ie we are dropping packets from unknown source
+		  - Dropping of Packets 
+2. Restrict Mode : Drops packets with unknown source MAC address Until you remove a sufficient number of secure MAC Address 
+		  - To Drop below the maximum value 
+		  - It cause the security voilation counter to increament. 
+		  - Generation of Log messages and counter will increamented. 
+		  - Dropping + Logging of violation 
+3. Shutdownn Mode : It is the default mode 
+		    Put the port in Error Disable Mode and sends a SNMP Trap notification. 		  
+
+Configuring sticky mac address : 
+*****************************************
+S1(config-if)# switchport port-security mac-address sticky
+Write the mac address to the running configuration 
+ 
+*****************************************
+
+Port Security Error Disable and Auto Recovery : 
+*****************************************
+S1(config)# errdisable recovery interval <interval_time_in_second>
+*****************************************
+
+------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
