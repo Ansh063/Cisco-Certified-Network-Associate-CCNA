@@ -772,19 +772,40 @@ commands in cmd
 Dynamic Arp Inspection ( DAI ) : 
 
 DAI is used when there is ARP Spoofing Attack. 
+Dynamic Arp inspection stops attack ARP Poisoning and Man-in-the-middle Attacks. 
+
 command: 
-	-> ip arp inspection vlan [vlan_id] 
-	-> show ip arp inspection vlan {vlan_id}
+****************************************
+-> ip arp inspection vlan [vlan_id] 
+-> show ip arp inspection vlan {vlan_id}
+****************************************
+
 How would the switch know that this is the correct mac address attached to this IP address ?? 
 Ans : Using DHCP snooping. It listenes for DHCP messages and it will dynamically build a table having a IP address and the Layer 2 Address. 
 and for the device that is not a DHCP client we have to manually map the addresses. 
-
+So the Switch will allow our clients to request IP address but not allow any untrusted port to offer ip address to the client 
 Implementing DHCP snooping : 
 
 	-> show ip dhcp snooping binding 
 Note : When the device is not in the binding table first we need to make that port as a trusted port then we apply DAI. 
 	-> ip arp inspection trust
 	-> ip arp inspection vlan {vlan_id}
+
+Configuring DHCP snooping : 
+******************************************
+switch(config)# ip dhcp snooping 
+switch(config)# ip dhcp snooping vlan 1 
+switch(config)# show ip dhcp snooping 
+Now we have to make a port trusted which is destinated to dhcp server
+Switch(config)# interface <trusted_interface_name>
+Swicth(config-if)# ip dhcp snooping trust 
+******************************************* 
+ 
+configuring rate limiting to the interface from where the the DHCP discover packets are flooding in the network 
+
+*******************************************
+switch(config-if)# ip dhcp snooping limit rate <1 - 2048>
+ 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Routing information : 
