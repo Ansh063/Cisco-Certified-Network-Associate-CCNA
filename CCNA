@@ -1722,6 +1722,24 @@ Place standard ACLs as close to the destination as possible
 Place extended ACLs as close to the source as possible 
 	- Can match specific protocols 
 	
+Commands to configure ACLs : 
+
+Inboun extended access control list : 
+********************************
+Router(config)# access-list 101 permit tcp <source_ip> <wildcard> <destination_ip> eq 80 
+Router(config)# access-list 101 remark [message]
+Router(config)# access-list 101 permit udp <source_ip> <wildcard> <destination_ip> eq 69 
+Router(config)# access-list 101 deny ip <source_ip> <wildcard> <destination_ip> 
+Router(config)# access-list 101 permit ip <source_ip> <wildcard> any
+Router(config)# interface <interface_id>
+Router(config-if)# ip access-group 101 in 
+
+To remove the particular access list from the extended list : 
+
+Router(config)# ip access-list extended 102
+Router(config-ext-nacl)# no <line number>
+ 
+********************************
 
 ------------------------------------------------------------------------------------------------------------------------------
 
