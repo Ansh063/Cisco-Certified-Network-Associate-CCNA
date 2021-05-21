@@ -1519,6 +1519,209 @@ Port Security Error Disable and Auto Recovery :
 *****************************************
 S1(config)# errdisable recovery interval <interval_time_in_second>
 *****************************************
+------------------------------------------------------------------------------------------------------------------------------
+
+# 802.1X 
+
+Wired Ethernet Network has no 
+	- No Authentication 
+	- No Authorization 
+	- No Accounting 
+AAA Server is a way to centralize policies that are applied to network devices 
+
+Authentication : You are Authenticating a username and password before a user can access the network. 
+Authorization : Determines what you are allowed to do 
+		Privilege mode
+Accounting : is a log of what's happenend on the network 
+
+Note : you can implement a identity based authentication or identity based networks by using a protocol called 802.1X 
+client machine has to present username and password before they gain access to the network. 
+
+It consists of Three Roles : 
+	Supplicant (client) : windows, linux PC running 802.1X software 
+	Authenticator : This doesn't authenticate the client but sends the authentication information to the Authentication Server, This is like a Ethernet Switch which is controlling access to the network, This device only permit 802.1X frames before authentication takes place. 
+	Authentication Server : This validates the credentials of the client , it makes sure that the username and the password of the client is correct.  
+RADIUS or TACACS are the protocol used between the authenticator and the authentication server.  		
+
+NOTE : 802.1X : The Client Cannot access the network until the authentication has succedd. 
+
+The username and password information is stored on each router or switch individually. 
+R1(config)# username David password Bombal 
+R1(config)# line console 0 
+R1(config-line)# login local 
+
+Now we have to configure this configuration to every router to centralize this cisco has a cisco ACS server.  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+RADIUS and TACACS : 
+
+When a client login to the network device they will be prompted for their credentials But that information is not checked 
+against the local username and password database but is forwarded to an authentication server such as cisco ACS using the two 
+proocol : 
+	- Radius
+	- tacacs 
+So the username and password information is forwarded in encrypted format to the authentication server and a response is sent 
+back from the server to the authenticator. 
+
+Radius : Radius is an open standard protocol that combines authentication and authorization into a single process. 
+	 It uses UDP 
+Tacacs+ : It is a Cisco Proprietary protocol that seperates the service authentication, authorization and accounting. 
+	  It uses TCP/IP 
+	  
+Features 		TACACS+ 		RADIUS
+Often used 		Network Device		Users
+Port Num. 		49			1645,1812
+Encrypt the Pass.	yes			yes
+Encrypt the entire	yes			No
+packet   
+
+------------------------------------------------------------------------------------------------------------------------------
+Configuring AAA : 
+
+R1(config)# aaa new-model 
+R1(config)# line console 0 
+now login local doesn't work
+R1(config-line)# login authentication WORD/default
+R1(config)# tacacs-server host <ip_address_of_cico-ACS_server>
+R1(config)# tacacs-server key [key]
+R1(config)# aaa authenticate login [WORD/default] group tacacs+ local  
+Default means that this authentication method is going to be applied to all the lines on the router that means the console, VTY 
+auxilliary port, tty lines 
+
+line console 0 
+login authentication default 
+
+line vty 0 5 
+login authentication default 
+
+
+********************************************
+Now we use groups to configure 
+
+aaa new-model 
+username david password cisco   ---> this is the backup username and password
+
+tacacs server acs
+address ipv4 <acs_server_ip_address>
+key cisco
+exit
+
+aaa group server tacacs+ acsgroup 
+server name acs
+exit
+
+aaa authentication login default group acsgroup local
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Access Control Lists : 
+
+Implementing Security using access control list : 
+
+Outline : 
+	Purpose of ACLs 
+	Inbound and Outbound ACLs
+	Numbered, named, standard and extended ACLs 
+	Wildcard Masks 
+	Time Based, reflexive and dynamic ACLs 
+
+Why ACLs ? 
+	- Permit or Deny packets moving through a router 
+	- Permit or Deny vtp access to or from a router 
+	- Without ACLs, all packets could be transmitted to all ports of the networks 
+	- interesting traffic for VPN connection 
+	- Redistribution between routing protocols
+	- NAT - which packets are to be translated ? 
+	- Permit or Deny packets moving through a router 
+
+Create ACL in global configuration Mode  :
+	- access-list command : create the access list 
+Apply inbound or outbound to an interface : 
+	- access-group command : Bind the access list  
+
+NOTE : ACL does not take effect until its applied. 
+
+Inbound Access control lists : 
+	- Applied inbound to the interface 
+	- ACL processed before being routed 
+	- if discarded, will not have to be processed for routing 
+	- if permitted, will be processed for routing
+  	
+Outbound Access Control Lists : 
+	- Routing performed first 
+	- Packet is directed to an outbound interface 
+	- Permitted - packet transmitted 
+	- Denied - Packet is Droped 
+
+Note : It is more efficient to bind an ACL to the inbound on the interface because packets that are dropped will need not to 
+       be processed by the routing process on the router. 
+	
+An access list is sequential list of statements where packets are evaluated from the first statement to the last. 
+	- Packets evaluated top down 
+	- if a match 
+		- Permit
+		- or deny 
+	- if line does not match
+		- check the next line 
+	- if no match in the ACLs is found, implicit deny at the end
+		- Packets are dropped 
+	- Must have atleast one permit statement 	
+
+Types of Access control list : 
+	- Standard ACLs : 
+		- Check for Source IP Address
+		- Permit or deny entire protocol suite 
+	- Extended ACLs : 
+		- Checks both Source and Destination IP Address 
+		- Permits or Deny specific protocols and applications 
+		- Permits or Deny based on Protocols or port numbers 
+	
+Two methods to identify standard and extended ACLs : 
+
+1. Named : 
+	-> Alphanumeric characters 
+	-> More Descriptive  
+
+2. Numbered : 
+	-> 1 - 99 and 1300 - 1999 for standard IP ACLs 
+	-> 100 - 199 and 2000 - 2699 for extended IP ACLs 
+	-> Number range specifies protocol (IP/IPX/AppleTalk)
+	
+NOTE : The Remark Option allows you to add a description to your ACLs 
+
+Wildcard Masks : 
+
+	- Match a specific IP address 
+		- access-list 1 permit 192.168.0.100 0.0.0.0
+			or use
+		- access-list 1 permit host 192.168.0.100
+	- Match Anything 
+		- access-list 1 permit 0.0.0.0 255.255.255.255
+			or use 
+		- access-list 1 permit any 
+	- Match any subset 
+		- access-list 1 permit 192.168.0.100 0.0.0.255 
+
+Guidelines For ACls 
+
+- Standard / Extended indicates what can be filtered 
+- Order of Processing is of importance 
+	- Place more specific first 
+- Implicit deny all at the end of every ACLs 
+- Only one ACL can be Bind to 
+	- Per Interface 
+	- Per Direction 
+	- Per Protocol 
+- Overwritten without warning 
+
+# Placement of ACLs : 
+
+Place standard ACLs as close to the destination as possible 
+	- Cannot match specific protocol 
+Place extended ACLs as close to the source as possible 
+	- Can match specific protocols 
+	
 
 ------------------------------------------------------------------------------------------------------------------------------
 
