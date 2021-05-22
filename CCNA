@@ -1741,6 +1741,34 @@ Router(config-ext-nacl)# no <line number>
  
 ********************************
 
+Lab of Access Control List : 
+
+Router1(config)#access-list 100 permit tcp host 10.1.2.101 host 10.1.1.100 eq 80 
+Router1(config)#access-list 100 deny ip 10.1.2.0 0.0.0.255 10.1.1.0 0.0.0.255
+Router1(config)#do show run | i access
+
+Now to delete any particular access list 
+
+Router1(config)# ip access-list extended 100 
+Router1(config-ext-nacl)#no <list_number>
+
+To remove whole access list run : 
+
+Router1(config)#no access-list 100
+
+To edit any access-control list : 
+
+Router1(config)#ip access-list extended 100
+Router1(config-ext-nacl)#do show access-list
+Router1(config-ext-nacl)#no 20
+Router1(config-ext-nacl)#20 permit tcp host 10.1.2.102 host 10.1.1.101 eq 443
+Router1(config-ext-nacl)#do show access-list
+
+now we need to bind it to the interface on the router 
+
+Router1(config-ext-nacl)# interface gig0/0/0
+Router1(config-if)#ip access-group 100 in
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
