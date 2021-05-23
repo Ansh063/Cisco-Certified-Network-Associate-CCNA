@@ -1926,8 +1926,109 @@ The Transmission quality of the network is determined by the following Factor :
 -> When only 3 bits are used this is called as IP Precedence. 
 -> When 6 bits are used then it is called DSCP 
 -> COS value is DSCP is known as class selector (CS)
+-> 8-bit differentiated services field (DS field) which consists of a 6-bit Differentiated Services Code Point (DSCP) field
 
-			    	 	 
+Differentiated service Code Point (DSCP) : 
+
+-> When all the six bit is set to zero is called as Best effor class (BE class)
+-> Assured Forwarding class uses the first 5 Most significant bits from the DSCP
+Class 1 : 
+	AF1  =  001 010 = AF11
+		001 100 = AF12
+		001 110 = AF13 
+CLass 2 : 
+	AF2 =   010 010 = AF21 
+		010 100 = AF22
+		010 110 = AF23
+Class 3 : 
+	AF3 = 	011 010 = AF31 
+                011 100 = AF32
+                011 110 = AF33
+Class 4 ; 
+	AF4 =	100 010 = AF41 
+                100 100 = AF42
+                100 110 = AF43
+
+Higher the first Number the more important the your traffic 
+but Higher the second Number the less important your traffic. 
+
+# Expedited Forwarding : The EF PHB can be used to build a low loss, low latency, low jitter, assured bandwidth, end-to-end
+			 service through DS(Diffser) Domain.
+			 This service is also been described as Premium Service 
+			 CodePoint 101110 which equals to 46 as a DSCP value. 
+# Class Maps : Class map is a way to create groups or classes of traffic 
+# Classification and Marking Tools : 
+	Layer 2 Parameters : 802.1Q Class of Service(COS) 
+	Layer 3 Parameters : IP Precedence(IPP), Differentiated Service Code of Point (DSCP), 
+# DSCP (6 Bits ) + Explicit Congestion Notification (2 Bits)
+------------------------------------------------------------------------------------------------------------------------------
+
+Trust Boundary : 
+	Where the packets are classified and marked. 	
+	
+Untrusted Domain : It is the part of the network that you are not managing (PC, Printer)
+Trusted Domain : It is the part of the network that only administrator can manage.(IP Phone, switch, Router)
+In an enterprise network the trust boundary is the edge of the network.
+For ISP it would be the last device that is manages. 
+   	    			    	 	 
+------------------------------------------------------------------------------------------------------------------------------
+Classification and Marking : 
+	Best Practice state that we should classify and mark as close to the edge of the netwok as possible. 
+	so Marking takes places at the edge but every device along the path uses classification to determine what QoS that gets
+Classification is based on three criteria : 
+	1. COS or DSCP value 
+	2. IP Addressing (Source (IP,port), Destination (IP,port), Specific IP,Mac add. )	
+	3. Router can supoort Deeper payload inspection by using application signatures using 
+
+Network Based application recognition (NBAR) : Router use NBAR to look deep into a packet determine how important traffic is. 
+NABR uses layer 4 to 7 for deep inspection, generally done on the edge of the network. 
+NBAR Modes of operation : 
+	1. Passive Mode :
+		Provide real Time statistics on application per protocol or interface and give bidirectional statistics such 
+		as bit rate, packets and bit counts.   
+		Give statistics but no marking 
+	2. Active Mode : 
+		Classifies application for traffic marking, so that QoS policies can be applied. 
+		Give marking and Quality of service policies. 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Policiers and Shapers : 
+	policing and shaping limits the ammount of traffic that you can transmit.
+	they are Rate limiters. 
+	
+	- Policers : will drop the excess traffic 
+		     Do Not delay the traffic
+		     Remark it and transmit it 
+		     Drop it  
+	- shapers : will delay the excess traffic
+		    Smooth traffic out by buffering it 
+		    Excess Traffic is buffered and delayed 
+ 
+Shaping implies the existence of a queue and of sufficient memory to buffer delayed packets, while policing does not.
+
+Policers are generally used as a ingress tools : traffic is dropped before it processed 
+When a policer drops the traffic, it causes a lot of tcp retransmission. 
+policier doesnot introduce delay and jitter 
+Shaped will introduce delay and jitter by buffering the traffic .  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Congestion Management : 
+	Queuing Mechanism Manages Congestion. 
+	Queuing is used only when congestion occurs. 
+	Traffic is processed based on the queuing algorithm used. 
+	Queuing is the logic of ordering packets in output buffers.
+
+# Scheduling : Is the process of Deciding which packet should be sent out next. 
+	       Scheduling is Congestion independent. means it always in work whether there is congestion or not.
+		  
+NOTE : When the Queue become full packets are reordered so that higher priority packets can be sent out before lower priority.
+
+# Congestion Management Queuing Mechanism : 
+
+1. Fist In First Out (FIFO) : 
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
