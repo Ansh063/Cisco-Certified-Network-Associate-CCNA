@@ -2028,6 +2028,50 @@ NOTE : When the Queue become full packets are reordered so that higher priority 
 # Congestion Management Queuing Mechanism : 
 
 1. Fist In First Out (FIFO) : 
+	A single queue with packets that are sent in the exact order that they arrived. 
+	Problem : This algo is not good for voice and video traffic. 
+	
+2. PQ(Priority Queue) : 
+	Consists of four queues that are serve in a strict-priority order. 
+	The Lower Priority queue are served only when the higher priority queues are empty. 
+	Problem : The Low Priority Queue could starve if there is constant traffic in the high, normal or medium 
+
+3. Custom Queuing (CQ) : 
+	16 Queue serviced in a round robin fashion 
+	in order to prevent starvation 
+	it provide traffic guarantees 
+		- Doesn't Provide Strict Priority for real time traffic
+	if you have important voice traffic arriving it will only be served in its round. 
+	It introduces a delay. 
+	
+4. Weighted Fair Queuing (WFQ) : 
+	- Algorithm that divide ethernet bandwidth by the number of flows 
+	- It provide a good service for real time traffic 
+	- No Bandwidth Guarantee for particular flow 
+	- Smaller packets are passed first rather than large packets. 
+It uses a clever scheduling algorithm to prioritize smaller interactive packets 
+It Doesn't Provide Bandwidth GUARANTEE 
+			 
+5. Class Based Weighted Fair Algorithm : 
+	developed by cisco. 
+	Guaranteed bandwidth to a specific classes and provide dynamic fairness of other flows. 
+	Different classes 
+	ever class will get atleast Minimum Bandwidth 
+	No Latency Guarantee : 	
+		- There is no Priority Queue
+
+6. Low Latency Queue (LLQ) : 
+	fullname : Priority Queue Class Based Weighted Fair Algorithm 
+				  		 
+------------------------------------------------------------------------------------------------------------------------------
+
+# Congestion Avoidance : 
+	
+WRED (Weighted Random early Detection) : 
+	Randomly drops packets from multiple flows before the queue fills up. 
+		
+
+NOTE : Tail Drop : When the queue fills up All new packets will be dropped.  
 
 ------------------------------------------------------------------------------------------------------------------------------
 
