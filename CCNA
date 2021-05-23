@@ -1817,7 +1817,7 @@ Creating a static nat :
 ********************************
 ip nat outside 
 ip nat inside
-ip nat inside source static <inside IP address> <public_ip_address>
+ip nat inside source static <inside IP address> <public_ip_address> extandable 
 show ip nat translations 
 ********************************			 
  
@@ -1850,6 +1850,77 @@ R2(config)# access-list 1 permit 10.1.1.0 0.0.0.255
 R2# show ip nat translations 
 ********************************
 
+some commands : 
+ip nat inside source static tcp 10.1.1.1 23 8.8.8.1 23 extendable 
+show ip nat statistics 
+------------------------------------------------------------------------------------------------------------------------------
+
+# Quality of Service (QoS) : 
+
+- Providing a better quality to certain application at the detriment of other applications. 
+Managed Unfairness : Introducing unfaireness into the network. 
+Three types of Traffic  : 
+	1. Data
+		- Bursty and Greedy traffic
+		- Drop insensitive : if a packet is dropped, doesn't matter because it is retransmitted 
+		- Delay insensitive : Depends on type of data is sent. 
+		- 2 Major type of Data Application : 
+			1. Interactive Data Application 
+				- Telnet 
+			2. Non Interactive Data Application 
+				- FTP
+	2. Voice 
+		- Smooth : uses certain ammount of Bandwidth 
+		- Drop Sensitive 
+		- Delay - Sensitive 
+		- Sent over UDP (no retransmission)
+		One way requirement : 
+		- Latency < 150ms
+		- Jitter  < 30ms 
+		- Loss < 1%
+		- Bandwidth (30 - 128kbps)
+	
+	3. Video 
+		- Video has a characteristics of both voice and data in that it is bursty and greedy 
+		- Drop Sensitive 
+		- Delay sensitive 
+		- It uses UDP 
+		One way requirement 
+		- Latency < 150ms 
+		- Jitter < 30ms
+		- Loss 0.1% - 1%
+		- Bandwidth (384kbps - 20+ Mbps)
+ 
+Quality of Service : 
+	- Priority to some session over other 
+	- Policies 
+	- Imlpement policies 
+
+The Transmission quality of the network is determined by the following Factor : 
+
+1. Loss : A relative measure of the number of packets that were not received compared to the total number of packets transmitted
+2. Delay : The Finite ammount of time it takes a packet to reach the receiving endpoint after being transmitted from the sending
+	   Endpoint 
+3. Jitter (Delay Variation): The Difference in the end-to-end delay between packets. 
+
+# Complete Process : 
+
+1. Admission Control : give permission to the data that data should be sent or not. 
+2. Classification and Marking : It essentially looking at traffic types and putting them into classes 	 	  
+3. Policing and Markdown : If you are sending too much traffic, your traffic could be dropped 
+4. scheduling : this includes Queuing and Dropping 
+5. Traffic Shaping 
+6. Link Specific Mechanism 
+	
+-> Marking is done using 802.1Q 
+-> 802.1Q has a Priority Field (3 Bits in Size) also called as COS (class of service ) 
+-> COS (Class of Service) : It is a 3 bit value goes from = 0 to 7 
+			    Voice COS value is 5 
+-> Marking packet to indicate to another device how important packet is. 
+-> Marking require 802.1Q trunk ports 
+
+# IP Precedence a
+			    	 	 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
