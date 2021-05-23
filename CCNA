@@ -1919,7 +1919,14 @@ The Transmission quality of the network is determined by the following Factor :
 -> Marking packet to indicate to another device how important packet is. 
 -> Marking require 802.1Q trunk ports 
 
-# IP Precedence a
+# IP Precedence and DSCP : 
+
+-> In IPv4 there is a field named type of service, it consists of eight binary value 
+-> this value is known as DSCP (Differentiated service code points) 
+-> When only 3 bits are used this is called as IP Precedence. 
+-> When 6 bits are used then it is called DSCP 
+-> COS value is DSCP is known as class selector (CS)
+
 			    	 	 
 ------------------------------------------------------------------------------------------------------------------------------
 
