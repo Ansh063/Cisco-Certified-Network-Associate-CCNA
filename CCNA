@@ -2074,6 +2074,155 @@ WRED (Weighted Random early Detection) :
 NOTE : Tail Drop : When the queue fills up All new packets will be dropped.  
 
 ------------------------------------------------------------------------------------------------------------------------------
+IMP:
+
+OSPF (Open Shortest Path First) : 
+	- It is a Open Standard Protocol. 
+	- Shortest Path First also known as the Djikstra's Algorithm is used to determine the shortest path or best route 
+	  to a destination. 
+	- Topics of OSPF : 
+		- Features 
+		- Single Area OSPF 
+		- Loopbacks 
+		- Configuration 
+		- Multiple Area OSPF 
+		- Authentication 
+	
+Overview : 
+	OSPF :  - Link State Running Protocol 
+	       	- LSA are flooded throught the network or area describing the links attached to a router. 
+		- Link Router interfaces 
+		- State Desciption of an interface and its relationship to neighbouring router. 
+		- Creates neighbour relationships using 224.0.0.5 or unicast 
+		- Resides Directly on top of IP 
+		- Does Not use TCP or UDP 
+		- Protocol ID 89 
+		- resides at layer 3 
+		- OSPF is reference with Protocol ID 89 in an IP version for header.
+		- By default synchronized every 30 minutes. 
+	
+OSPF Tables : 
+	1. IP OSPF Neighbor Table (Adjacency Table)
+		Neighbouring Router 
+	2. IP OSPF Topology Table (LSDB)
+		All router and attached links in area / netwok
+	3. IP Routing Table (Forwarding Table )	
+		Best Routers 
+
+OSPF Packets Types : 
+	1. HELLO :
+		- Dynamically Discover Neighbour 
+		- Form Neighbour and maintain those relationship 
+		- Defaults Intervals of HELLO packets : 
+			- 10 Seconds on broad segment (Ethernet)
+			- 30 Seconds on non- broadcast segment (Serial, NBMA)
+		- Dead Timer : 
+			- 4 Times hello interval by default 
+	
+	2. Database Description (DD/DBD) : 
+		- Used to Exchange brief version of each LSA
+		- If parts of the Database is missing on one router it will sent a Link state Request 
+	3. Link State Request (LSR) : 
+		- Requesting for Full LSA Information. 
+	4. Link State Update (LSU): 
+		- Neighbouring router will send LSU that is the packet which contain LSA 	  		
+		- typically in response to LSR 
+	5. Link State Acknowledgement (LSAck) : 
+		- Confirm receipt of an LSU message 
+
+Autonomous System (AS) : 
+	It is a group of router under a common administrative domain 
+
+OSPF is an IGP (Interior Gateway Protocol) Means it is used within an autonomous system. 
+For scalability, OSPF network have broken up into different areas. 
+Area 0 is known as the backbone area. 
+All the traffic from one area to another area need to traverse via backbone area. 
+Router that border the backbone area and another area is known as Area Border Router (ABR)
+Autonomous system Border Router (ASBR) : It Borders two autonomous systems. When a router join to different protocol it is also
+					 know ASBR. 
+Router Which are in area 0 are known as backbone routers 
+Internal Routers 
+
+
+OSPF router uses HELLO to form Neighbour Adjacencies. 
+
+Hello Packet Contain : 
+
+1. Router ID : A Router ID identifies the specific router, this id is used in election
+	       A Router ID is the highest IP address of any configured interface or the highest loopback interface active on 
+	       router. 
+		Loopback take precedence over innterface ip address. 
+		Loopback never go down unless manually configured as down
+2. HEllo or Dead Interval : This must be the same on both the router. 
+3. Neighbours : It contains a list if neighbours that the router knows about. 
+4. Area ID : must also match on both router 
+5. Router priority : Used in designated and Backup Designated Router. 
+6. DR IP address
+7. BDR IP Address
+8. Authentication Password
+9. Stub areaflag : Denotes whether this is a stub area or normal area . 		  
+
+
+Designated Router : 
+
+	- DR is used to Broadcast multi access environment such as ethernet and certain WAN implementation such as non broadcast
+	multi axis environment on frame relay. 
+	
+Designated Router are selected on two criteria : 
+	1. Highest Priority : The Default Priority is 1 
+				Varies from 0 to 255
+				0 is used to disable  
+	2. Highest Router ID : if the priority is same then the router with highest router id is elected as the designated 
+				router for the segment. 
+
+	- Designated router are listening on this multicast address 224.0.0.6 other router are not listening on this address
+	- The update is send to DR using the multicast 224.0.0.6 and then DR will send an update to all the other router using 
+	  224.0.0.5 multicast address. 
+	- If the DR fails then the BDR takes place as DR 
+	- BDR become the DR if DR Fails 
+	- after the election of DR and BDR all other router are called ""DR Others""
+	
+Shortest Path First Algorithm : 
+	The algorithm places each router at the root of the tree and calculates the shortest path to each node using Dijkstras
+	based on the cumulative cost that is required to reach the destination. 
+
+Cost : 
+	- Default reference bandwidth = 10^8
+	- cost = ( 10 ^ 8 ) / Bandwidth
+	- 1 kbps = 1000 bps
+	- 1 Mbps = 1000,000 bps
+	- 10 Mbps = 10,000,000 bps 
+	
+	# To change the reference bandwidth use command 
+	auto-cost reference-bandwidth [Enter your bandwidth]
+		
+	# To change the cost on an interface use command : 
+	ip ospf cost [Enter your Cost ]
+
+NOTE : Stub and not so stubby area (nssa) are special types of area used to reduced the number of route in the routing. 
+	
+Configuring OSPF : 
+	
+R1(config)# router ospf [process_id] 
+R1(config-router)# do show ip ospf interface 
+For neighbour relationship to be established and for router to be advertised configure 
+R1(config-router)# network [ip address] [wildcard_mask] area 0 
+R1(config-router)# do show ip ospf interface
+R1# show ip protocols 
+R1# show ip ospf 	
+
+Process ID should be differeny on all the routers 
+R1(config-router)# network 0.0.0.0 255.255.255.255 area 0 
+	This command will enable ospf on all the interface 
+
+To manually configure ip address on a router : 
+R1(config) router ospf 1
+R1(config-router)# router-id 1.1.1.1 
+R1# clear ip ospf process 
+R1# show ip ospf neighbour 
+R1# show ip ospf database 
+
+------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
 
