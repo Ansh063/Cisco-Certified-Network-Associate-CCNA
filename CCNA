@@ -2143,6 +2143,10 @@ Autonomous system Border Router (ASBR) : It Borders two autonomous systems. When
 Router Which are in area 0 are known as backbone routers 
 Internal Routers 
 
+NOTE ** : For OSPF timers configuration must be same on both the devices.
+timers can be influenced by the network command 
+Ethernet is a broadcast multi access environment, no a NON BROADCAST environment that would be used for frame relay. 
+Router(config-router)# ip ospf netwok broadcast 
 
 OSPF router uses HELLO to form Neighbour Adjacencies. 
 
@@ -2221,6 +2225,25 @@ R1(config-router)# router-id 1.1.1.1
 R1# clear ip ospf process 
 R1# show ip ospf neighbour 
 R1# show ip ospf database 
+
+NOTE : when a router is in between area 1 and area 2 then we need to create a tunnel from area 0 to area router which have both
+       area 1 and area 2. 
+
+configuring a virtual tunnel from router 3 (in area 0 ) to router5 (having area 1 and area 2) 
+
+R3(config)# router ospf 1
+R3(config-router)# area 1 virtual-link [router_id of router 5 : 5.5.5.5]
+
+R5(config)# router ospf 1 
+R5(config-router)# area 1 virtual-link [router_id of router 3 : 3.3.3.3]
+
+-> After making the virtual links then also all the traffic will pass through the physical routers 
+-> The Virtual link is simply used for OSPF link Advertisements. 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------
 
