@@ -2242,7 +2242,74 @@ R5(config-router)# area 1 virtual-link [router_id of router 3 : 3.3.3.3]
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+Internet Protocol Version - 6 (IPv6) : 
 
+Outline : 
+
+1. Need for IPv6 
+	- Because of shortage of IPv4 address 
+
+2. Format of an IPv6 address 
+	- X:X:X:X:X:X:X:X where X is a 16 Bit HexaDecimal Field 
+	- Case insensitive 
+	- Leading Zeros are optional
+	- Successive filds of zeroes can be represented as   :: 
+		- But Only Once per address
+	- 16 octects = 128 Bits 
+	- written in Hexa Decimal.  
+
+3. Surfing the Web : 
+	- In a URL, enclose the IPv6 address in brackets 
+		- http://[2001:1234:4567::8]:8080/login.php
+		- IPv6 address should be enclose in [] 
+	- That's Why use Fully Qualified Domain Names (FQDN)
+	-   
+
+4. IPv6 address Types : 
+
+1.  Unicast Address :  
+	    - Address for single interface 
+	    - Several types 
+		- Global Unicast Address : The address on your interface, on your PC at home will be unique globally.
+		- Reserved unicast Address
+		- Link Local unicast address :- Allow two hosts to communicate with each other without ip address being assign
+					      to those devices. 
+					      - Many IPv6 routing protocol also use linked local address to communicate with 
+						each other.
+					      - Link Local address are also used for link communication, such as Automatic 
+						Address configuration. Neighbour Discovery, Router Discovery. 
+		- Site Local Unicast Address : These are addresses assigned to an entire site within an organization, 
+						So site local address would only be valid within the site network of an
+						organization site. 
+						They are deprecated and no longer in use. 
+		- Special purpose unicast : 
+			- Unspecified (::)
+			- loopback (::1)
+			- IPv4 Compatible : There address was also deprecated  
+			
+2. Multicast Address : 
+	   - One to Many 
+	   - Enables more efficient use of network 
+	   - Uses a larger address range 
+	   
+3. Anycast Address : 
+	   - One to Nearest (allocated from unicast address space) 
+	   - Multiple Device share the same address 
+	   - All anycast nodes should provide uniform service 
+	   - Router Decide on closest device to reach destination 
+	   - Suitable for Load balancing and content delivery address 
+	
+-> IPv6 LoopBack Address :->  ::1
+-> There is no need for NAT in IPv6 
+
+IPv6 Unicast Address : 
+	- 64 Bits (Network prefix)	
+	- 64 Bits (Interface Identifier)
+	- > No Subnetting like in IPv4 
+	- > No NAT in IPv4 
+	- > Each Link will have a /64 Subnet Mask 
+	- > Interface ID can use Modified EUI-64 Format 
+	 	 
 
 
 ------------------------------------------------------------------------------------------------------------------------------
