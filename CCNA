@@ -2311,6 +2311,214 @@ IPv6 Unicast Address :
 	- > Interface ID can use Modified EUI-64 Format 
 	 	 
 
+# IPv6 Aggregatable Global Unicast address : 
+	
+	Network Prefix 		Interface Identifier 
+	   64 Bits 		     64 Bits 
+
+   Global Prefix    Subnet ID 	    Interface Identifier 
+      48 Bits        16 Bits 		64 Bits 
+   Public Topology  Site Topology      Interface	
+		
+-> 2^16 gives you 65536 subnets 
+-> ISP allocates you /48 
+-> You allocate a /64 to each interface 
+-> Uses a global routing prefix - enables aggregation 
+-> every ipv6 interface contain at one loopback ::1/128
+-> Optionally, Multiple unique local and global address 
+-> Aggregation / Summarization more efficient 
+ 
+# IPv6 Link Local Address : 
+
+-> Have a scope limited to a link 
+-> Are Automatically configured with the interface ID 
+-> starts with  -->  FE80::/10
+
+# IPv6 site Local Address : 
+
+-> Have a scope limited to this site 
+-> Contain the inside topology of the site with the subnet ID 
+-> Have been Deprecated 
+-> Start  with ---> FEC0::/10 
+
+# IPv6 Compatible Addresses : 
+
+-> In this address, the most significant 96 bits are set to zero and the last 32 bits is set to IPv4 address. 
+-> Used to represent the addresses of IPv4 Node as IPv6 addresses 
+-> Has been Deprecated. 
+-> Tunneling 
+-> 0:0:0:0:0:0:192.168.1.100
+-> = ::192.168.1.100
+-> = ::C000:0246 is in hexa decimal 
+
+# Unspecified and Loopback address : 
+
+# Unspecified Address : 
+	- 0:0:0:0:0:0:0:0
+	- Uses as a place holder when no address is available (initial DHCP request, DAD)
+# Loopback Address : 
+	- 0:0:0:0:0:0:0:1 
+	- same as 127.0.0.1
+	- Identifies itself 
+    
+# IPv6 Multicast address  :
+
+	1. Assigned  (FF00::/8)
+	2. Solicited-Node ; This is used similar as ARP but their is no broadcast so this is a multicast 
+	
+------------------------------------------------------------------------------------------------------------------------------
+
+# Stateless Autoconfiguration : 
+	
+-> Stateless configuration is a new function enabled by IPv6 
+-> IPv6 is designed to enable auto configuration of IPv6 addresses on devices while keeping those address unique 
+-> Enables serverless basic configuration of node as well as easy renumbering 
+-> Router send periodic router advertisement messages using a link local address - from FE80::250:3EFF:FEE4:4C00 to FF02::1
+-> 7 Days life time by default on cisco routers 
+-> Routers uses a ICMPv6 which is known as Router Advertisement 
+-> Prefix : 2001:0:0:1::/64 
+
+FROM ROUTER TO OTHER ROUTERS 
+-> Host Sends router solicitation to all router at FF02::2
+-> ICMPv6 type 133
+-> Host uses it's link local address FE80::/10 as source 
+
+FROM ROUTER TO HOST
+Router advertisement : Sends network type information : Prefix, Default Route 
+-> Router Replies with ICMPv6 Type 134
+-> Router uses it's link local address FE80::/10 as source 
+-> Destination FF02::1 
+
+NOTE *** : Host AutoConfigured Address  : Prefix Received + Link Layer Address 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Stateful DHCP (DHCPv6) : 
+
+- It provide more control than stateless auto configuration 
+- can be used concurrently with stateless autoconfiguration 
+- can provide IPv6 addresses in the absence of router 
+- can be used for network renumbering 
+- can be used for automatic domain name registration of hosts using Dynamic DNS
+ 
+Process : 
+
+PHASE 1 : 
+if a router is found : 
+	- Host examines router advertisement to determine if DHCPv6 can be used 
+Initially client will first detect the presence of routers on the link by using "Neighbour Discovery messages" 
+
+PHASE 2 : 
+if DHCPv6 can be used : 
+	- Host sends a DHCP solicit message to DHCPv6 agents on multicast address FF02::1:2
+	- uses a source address of FE80::/10 
+
+If at least one  router is found the client will examine the advertisement to determine that DHCP version can be used 
+if the router advertisemnt enable the use of DHCPv6 on the link OR if there is no router, The CLIENT will start a DHCP SOLICIT 
+phase to find the server. 
+
+Now both DHCP Server and DHCP relay will listen for DHCP solicit message on this multicast address  
+
+PHASE 3 : 
+if DHCPv6 cannot be used : 
+	- Host uses stateless configuration 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+IPv6 Routing Protocols : 
+
+# IPv6 Routing Types :: 
+  - Static 
+  - RIPng (RIP next generation)
+  - OSPFv3 
+  - IS-IS
+  - MP-BGP4 (Multi protocol BGP version 4)
+  - EIGRP for IPv6 
+ 
+NOTE : The ipv6 unicast-routing command is required to enable IPv6 before any routing protocol is configured 
+R1(config)# ipv6 unicast-routing 
+R1(config)# ipv6 router rip RIPng
+R1(config)#  	
+
+# RIPng : 
+   - Similar to IPv4 
+	- Distance Vector 
+	- Radius of 15 hops 
+	- Split Horizon 
+	- Poison Reverse 
+	- Based on RIPv2 
+   - Updates : 
+	- IPv6 Prefix, next hop IPv6 address 
+    	- Multicast group of FF02::9 the all rip router, multicast group as the destination for RIP updates 
+	- In IPv4 address is 224.0.0.9 
+	- IPv6 is used for tranport RIP updates 
+   - configuration : 
+	- R1(config)# ipv6 router rip RIPNG1 
+	- R1(config)# int f0/0
+	- R1(config-if)# ipv6 rip RIPNG1 enable
+	- R1(config-if)# ipv6 rip RIPNG1 default-information originate 
+	
+Configuring OSPF : 
+	- R1(config)# ipv6 router ospf 1 
+	- R1(config-rtr)# router-id [router_id]    
+	- R1(confif-rtr)# int f0/0 
+	- R1(config-if)# ipv6 ospf 1 area 1 
+	- R1# clear ipv6 ospf process 
+------------------------------------------------------------------------------------------------------------------------------
+
+IPv4 to IPv6 Transition : 
+
+Transition richness means : 
+	- No Fix day to convert, no need to all convert at once 
+	- Different transition mechanism available 
+	
+IPv4 to IPv6 Transition : 
+	
+1. Dual Stack : 
+	Where we run  both IPv4 and IPv6 at the same time on a single host 
+
+2. Tunneling : 
+	We can setup a tunnel between routers to tunnel ipv6 over ipv4 
+	We can implement this using both 
+		1. Manual tunneling 
+			- Configured Manually on both the router 
+
+		2. dynamic 6 to 4 Tunneling 
+			- Configured automatically 
+			- Must Use 2002::/16 
+			- Gives a prefix to the attached IPv6 network 
+			- Subnet must have a mask of 48 
+			- 2002::/16 + HexaDecimal(IPv4) = 48 Bits 
+
+		3. Intra Site automatic tunnel addressing Protocol (ISATAP)
+			- It is an overlay tunnel 
+
+		4. Teredo Tunneling 	 
+	-> IPv4 Header is appended to IPv6 header 
+	-> On the other side IPv4 Header is strip off 
+	-> Protocol type 41 is specified in IP header 
+	-> 20 Byte IPv4 header with no option 
+	
+configuring tunnel : 
+R1(config)# interface tunnel 0
+R1(config-if)# ipv6 address [ipv6_address]
+R1(config-if)# tunnel source [source_ip_address]
+R1(config-if)# tunnel destination [destination_ip_address]
+R1(config-if)# tunnel mode ipv6ip
+
+now configure static route using tunnel 
+
+R1(config)# ipv6 router [destination_ipv6_address]/[subnet] tun0
+configure same steps to destinated router 
+
+Proxying and translation (NAT-PT) : 
+   - Translate addresses and Protocols 
+   Command : 
+	- ipv6 nat v4v6 source [Source IPv4 Address] [Destination IPv6 Address]
+	- ipv6 nat v6v4 source [Source IPv6 Address] [Destination IPv4 Address]
+	- ipv6 nat prefix [IPv6 Address]/96
+
+   Note : This subnet should always be /96
 
 ------------------------------------------------------------------------------------------------------------------------------
 
