@@ -2522,6 +2522,61 @@ Proxying and translation (NAT-PT) :
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+# Implement IPv6 Addresses on Hosts 
+
+# Stateless Address Auto configuration (SLAAC) : 
+	- Dynamically allocate IP address to host 
+
+# DHCP : 
+	- To allocate IP address to Host PC's 
+
+# IPv6 PC's and Host Uses : 	
+	- Neighbour Discovery Protocol Instead of ARP
+	- Neighbour's to Discover and exchange information 
+
+# IPv6 Hosts : 
+	- Hosts require an IP address to communicate 
+	- They need to know what their subnet mask is 
+	- They need to to know what their Default Gateway is 
+	- They need to know what their DNS server is, so that they can resolve names to IP address 
+
+# Neighbour Discovery Protocol (NDP) : 
+  A Number of Functions regards with regards to IPv6 
+	1. SLAAC : 
+		- A host can discover which subnet or prefix it belongs to 
+		- A host can use its MAC address for the host portion of IPv6 Address 
+		- A router can dynamically allocate the network portion of the address to a host using slack 
+		
+		Discovery : Learn the IPv6 Address of the available IPv6 routers in the same subnet 
+			    Need to determine the netwok portion of the address 
+
+	# DAD (Duplicate Address Translation ) : DAD is used by the host to determine that no other host is using the same 
+						 IP address 
+		- IPv6 will first check whether another host is using the same ipv6 unicast address as itself before it tries
+		  to use that address. 
+		
+  Neighbour Discovery Protocol is used Neighbour Mac Discovery 
+  NDP replaces IPv4 ARP 
+  
+  ICMPv6 also includes Neighbour Discovery Protocol : 
+	
+	1. Router Solicitation : 
+		- RS is sent to all the routers ( FF02::2 )
+		- Router on the local segment will be subscribed to that multicast address (FF02::2) and will reply back with 
+		  Router Advertisement.  
+
+	2. Router Advertisement : 	
+		- Sent By routers and include information such as 
+		- Link-Local IPv6 Address of the router
+		- Router Advertise themselves using multicast address (FF02::1)  
+  NOTE : Router also sends unsolicited Router advertisement messages on periodic basis they will advertise the detail on the 
+	 IPv6 Link and they send that again to FF02::1 
+	 Now by Leveraging Neighbour Discovery Protocol, Router Solicitation and Router Advertisement Messages, Host can 
+	 Discover which subnet they belong to. 
+
+  So Router by using SLAAC can advertise their local Prefix and length to the host on the local segment.        
+------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
