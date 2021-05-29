@@ -2575,6 +2575,87 @@ Proxying and translation (NAT-PT) :
 	 Discover which subnet they belong to. 
 
   So Router by using SLAAC can advertise their local Prefix and length to the host on the local segment.        
+
+ 	FF02:0:0:0:0:0:0:1  - All Node Address        224.0.0.1 - All System on that subnet 
+	FF02:0:0:0:0:0:0:2  - All Router Address      224.0.0.2 - All Router on this subnet 
+ 
+# Configuring DHCP in IPv6 : 
+  1. Client : 
+  2. Relay Agent 
+  3. DHCP Server 
+  
+  configuring relay agent :
+  router(config)# ipv6 unicast-routing  
+  router(config)# host relay 
+  router(config)# interface gig0/0
+  router(config-if)# no shutdown 
+  router(config-if)# ipv6 address [IPv6 Address]
+  **this command will be configure on the interface where dhcp request enter 
+  router(config-if)# ipv6 dhcp relay destination [IPv6 DHCP Server]
+
+  Configuring DHCP Server : 
+  Router_DHCP(config)# ipv6 dhcp pool mypool 
+  Router_DHCP(config-dhcpv6)# address prefix 2001:FACE::/64 
+  Router_DHCP(config-dhcpv6)# dns-server 2001:1234::2 
+  Router_DHCP(config-dhcpv6)# domain-name ccnax.com 
+  Router_DHCP(config-if)# ipv6 dhcp server mypool 
+ 
+  Configuring Client : 
+  client(config)# ipv6 unicast-routing
+  client(config-if)# ipv6 address dhcp 
+  client(config-if)# ipv6 enable 
+  client(config-if)#   
+	  	
+------------------------------------------------------------------------------------------------------------------------------
+
+Wide Area Network (WAN) : 
+	
+1. Point to point Protocols (PPP) : 	
+	 Point to Point WAN Connection 
+2. High Level Data link Control (HDLC) :
+	
+These are layered 2 encapsulation action that could be used on point to point serial connection which connect sites across 
+disparate geographical areas. 
+  
+WAN (Wide area network) : 
+
+This connects devices seperated by large geographical areas 
+A PPP /Serial Link is also called as leased line Provides a decicated connection between two sites 
+This uses a service provider network to provide the connection from one site to another. 
+Now today many PPP are replaced by Virual Private network (VPNs) 
+Where the connection is made across the internet 
+A WAN is often represented as a cloud connecting multiple sites together.    
+  
+The Two layer that take part is : 
+
+1. Physical layer : 
+	Rather than using an ethernet encapsulation 
+		- Frame Relay 
+		- PPP 
+		- HDLC 
+		- ATM 
+		- MPLS
+	Ethernet WAN Connections 
+	CSU : Channel Service Units 
+	DSU : Data Service Unit 
+A CSU/DSU (channel service unit/data service unit) is a digital-interface device used to connect data terminal equipment (DTE), such as a router, to a digital circuit, such as a Digital Signal 1 (DS1) T1 line. The CSU/DSU implements two different functions. The channel service unit (CSU) is responsible for the connection to the telecommunication network, while the data service unit (DSU) is responsible for managing the interface with the DTE. A CSU/DSU can have an externally connection point, or it can be integrated into a modular card installed in a router.
+
+# VPNs vs Leased line 
+
+Virtual Private Networks replaced lot of deployement of leased lines 
+1. Leased Line : Implies that you are leasing the line from a provider 
+		 You Don't Own the connection 
+	            - A Montly leasing fee to leased the line from the service provider 
+		 It is a dedicated circuit between two sites 
+  
+   Serial Link / Serial Line  : 
+		 Refer to the fact that the bits sent across the wire flows serially and that router use serial interface to 
+		 make the connection 
+   Point to Point link / Point to point Leased line : 
+		 Refer to the fact that you are making the connection between two points rather than between multiple sites
+		 at the same time. 
+	 	 	
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
