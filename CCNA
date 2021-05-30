@@ -2655,6 +2655,242 @@ Virtual Private Networks replaced lot of deployement of leased lines
 		 Refer to the fact that you are making the connection between two points rather than between multiple sites
 		 at the same time. 
 	 	 	
+Leased Lines : Synchronous Serial Communication 
+- Two Device will Synchronized there clocks 
+	- Align/Synchronize those clocks 
+	- Agree on parameters for data transfer 
+	- Including the data interval between bits of data
+- CSU/DSU : Provide the clocking master for the communication 
+	    Router is acting as slave and is receiving its clocking from the CSU 
+	    Uses its own internal Clocking 
+	
+Before communication starts 
+	- The Two Device have to align their clocks 
+	- agree on the clock interval 
+	
+Data communication Equipment : 
+	This will provide clocking to Data terminal equipment 
+	It also terminates the connection from the carrier. 
+Data terminal Equipment :  			
+	The router which is the data terminal equipment uses external clocking received from the DCE 
+
+Note : CSU/DSU or Data Communication equipment controls the speed and timing at which the router serial interface can send and 
+       Receive bits over serial cable. 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Different Serial WAN Interface Card : 
+
+WIC 1T : One Serial Cable 
+WIC 2T : Two Serial Cable 
+	
+WIC : Wan Interface Card 
+
+# Advantages of Leased Lines : 
+  - You can get a leased line up and running with just a few commands 
+  - Point to Point Leased Line also offers High quality of service 
+  - the connection is also permanent 
+  
+# Disadvantages of Leased Lines : 
+  - The cost of the leased line 
+  - you are charged for the bandwidth whether you use it or not 
+  - You are limited to the speed of your bandwidth 	
+
+------------------------------------------------------------------------------------------------------------------------------
+
+HDLC (High Level Data link Control) : 
+
+Two main types of encapsulation : 
+	
+HDLC : 
+  - Highlevel Data link Control - Layer 2 Encapsulation 
+	- uses across a leased line providing layer 1 service or connectivity from one site to another 
+ 	
+  - Cisco uses Cisco HDLC (type is added by cisco) 
+  - Cisco added type field in HDLC because : 
+	- To allow multiple higher layer protocols to traverse the link at the same time 
+    Type field is used to differentiate between : 
+	1. IPv4 
+	2. IPv6 
+    
+The Industry version of HDLC does not have type field denoting high level protocols 
+
+# Configuring HDLC : 
+
+R1> enable 
+R1# conf t
+R1(config)# interface serial 1/0 
+R1(config-if)# ip address 10.1.1.1 255.255.255.252 
+R1(config-if)# encapsulation HDLC 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# IPv6 Routing OSPFv3 : 
+	
+  - Provides Routing Capabilites for IPv6 
+  - If you have IPv6 then you can't use OSPFv2 (Used in Ipv4) 
+  - OSPFv3 Expands on OSPFv2 to provide supports for routing IPv6 Prefix 
+  - Supports for 128 Bit IPv6 Address 
+ 
+# Similarities in OSPFv2 and OSPFv3 : 
+
+  - Both Link-state Routing Protocol 
+  - Both use the same area design concepts and terms 
+	- Backbone Area 
+	- Area Border Router 
+	- Autonomous System border Router 
+  - Both Check various settings before a neighbour relationship is formed 
+  - Both Protocol Used Link-state Advertisements to advertise the details of network 
+ 
+NOTE : configuration in different OSPF : 
+ 
+In OSPFv2 we can configure using network command or by going to the interfaces 
+But in OSPFv3 we can only configure it by go to the interface and enable OSPF 
+
+OSPFv3 : 
+  - The Neighbor relationship is now formed using a link local address instead of an interface IP address    
+  - FF02::5 - To Advertise information to all OSPF routers
+  - FF02::6 - For OSPF designated router and Backup Designated Router  
+OSPFv2 :
+  - IPv4 interface IP addresses for the neighbor relationship establishment 
+  - Neighboring router have to be in same subnet 
+
+
+# Configuration of IPv6 Routers : 
+
+R1(config)# int loopback 0
+R1(config-if)# ipv6 address 2001:FACE:1::1/64
+R1(config-if)# int gig0/0
+R1(config-if)# ipv6 address 2001:1::1/64 
+R1(config-if)# no shut 
+R1(config)# ipv6 unicast-routing 
+R1(config)# ipv6 router ospf 1
+**R1(config-rtr)# router-id 1.1.1.1
+R1(config)# int loop0
+R1(config-if)# ipv6 ospf 1 area 1
+R1(config-if)# int gig0/0
+R1(config-if)# ipv6 ospf 1 area 1
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# IPv6 Access List 
+
+  - Permit or Deny traffic in your network 
+  - Source IP address or Destination IP Address in the protocol header 
+  - Individual Host addresses or subnet prefixes 
+  - Applied in an outbound or Inbound Direction 
+  - Transport layer protocol information 
+  - Implicit Deny at the end 
+  - Time Based Access list 
+Both are independent to each other "koi ko kisi se matlab nahi hai !! :)" 
+
+IPv6 uses only name to identify the ACLs 
+IPv4 Uses both Name/Number to identify the ACLs
+
+Extended and Standard are defined by their name in IPv6 not by their numbers 
+
+Ipv6 have some implicit permit statement at the end of each access list just above the implicit deny all 
+IPv4 Do not have any implicit permit statements 
+
+the Ipv4 access list have no effect on ip version 6 packets and vice versa 
+
+We dont have to block ICMpv6 or ICMPv4 Because some protocol required for neighbour discovery 
+
+IPv6 access list is created using a prefix length number that indicates the number of contiguous prefix mask bits 
+so we use a slash notation where the number after the slash indicates the number of bits in the prefix 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Configuring Access List : 
+
+Router(config)# ipv6 access-list acl1
+Router(config-ipv6-acl)# permit [source_ipv6_address] any
+Router(config-ipv6-acl)# interface gig0/0
+Router(config-if)# ipv6 traffic-filter acl1 in
+Router# show ipv6 access-list  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# VPNs : 
+
+What is VPN ? 
+
+VPN is a encryped connection between private networks over a public network such as the internet 
+  - Private Information across the internet 
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# What are we trying to accomplish ? 
+
+1. Data confidentiality : 
+	- No one else should be able to read the information by manipulating the data 
+	- Provided by data encryption and keys 
+2. Data Integrity : 
+	- know that the data has traversed unchanged between two parties 
+3. Data Origin Authentication : 
+	- The receiver can verify that the protected data could only have originated from the server 
+4. Antireplay Protection : 
+	- Verify that each packet is unique and not duplicated 
+
+  
+------------------------------------------------------------------------------------------------------------------------------
+
+# Cryptography Terminology : 
+
+1. Algorithm : 
+  	- Detailed steps for performing a function 
+2. Cipher : 
+	- An encryption algorithm 
+3. Asymmetric algorithm : 
+	- An Algorithm in which different keys are used for encryption and decryption 
+	- Public key algorithm are asymmetric 
+4. Symmetric Algorithm : 
+	- An algorithm in which the same key is used for encryption and decryption 
+	- secret key algorithm are symmetric   
+5. Key : 
+	- Is a bit of information that is required to decrypt the message, usually in the form of a value that is used with 
+	  a cipher to encrypt the message 
+	- The Key must be kept secret in order for the message to remain private 
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Symmetrical Algorithm : 
+
+  - The Same Key is used to encrypt and decrypt the messages 
+  - Both the sender and receiver must have the same key 
+  	- We will need to communicate this out of band 
+  - Good Symmetric Ciphers are fast, secure and easy to implement using modern microprocessors 
+  - DES, 3DES, AES, Blowfish 
+
+# DES : 
+  - DES is a symmetric key encryption 
+  - Fixed Key length = 56 Bits 
+  
+# 3DES : 
+  - 3DES is also a symmetric key encryption 
+  - Encrypt with key 1 
+  - Decrypt with key 2 
+  - Encrypt with key 3 
+  - K1 = K3 = 112 bit key length  
+  - K1 <> K3 = 168 bit key length 
+
+# AES : 
+  - Advanced Encryption Standard is the recommended symmetric key algorithm  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Asymmetrical algorithm : 
+
+  - Asymmetrical ciphers uses a different key to decrypt than was use to encrypt 
+  - Solves many long standing problem like how to exchange the secret keys in first place 
+	- Solves : How do we send the decided private key to each other without it being intercepted ? 
+        - Solves : Without a secure channel, there is no way to establish a secure channel 
+  - Long Key lengths of 512 to 2048 bits 
+ 
+# Diffie Hellman (DH) : 
+	- 
 
 ------------------------------------------------------------------------------------------------------------------------------
 
