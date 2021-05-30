@@ -2890,7 +2890,22 @@ VPN is a encryped connection between private networks over a public network such
   - Long Key lengths of 512 to 2048 bits 
  
 # Diffie Hellman (DH) : 
-	- 
+	- DH discovered a way to securely create a secure channel to exchange a shared secret key, which is required by 
+	  algorithm like AES, DES , 3DES.
+	 
+	DH1 = 768 Bits 
+	DH2 = 1024 Bits 
+	DH3 = 1536 Bits 
+
+Asymmetric encryption is used to establish a secure channel. 
+Symmetric Key encryption is used to encrypt bulk data (AES). 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Integrity 
+
+  - Ensure that data has not been tempered with 
+ 
 
 ------------------------------------------------------------------------------------------------------------------------------
 
