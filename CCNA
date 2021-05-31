@@ -3041,6 +3041,17 @@ Router(config-if)# tunnel destination [dest. address]
 
 configure this on other side also 
 
+Note We need to run routing protocol on both the end of the tunnel so the router will be advertise using tunnel 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Cloud Computing : 
+   - Hypervisors : 
+	- A Hypervisor is computer software, firmware or hardware, that creates and run virtual machine 
+   - A computer on which a hypervisors runs 
+ 
+# Network Function Virtualization : 
+   - Network Function Virtualization is the idea that you virtualize your network devices and network functions. 
  
 
 ------------------------------------------------------------------------------------------------------------------------------
