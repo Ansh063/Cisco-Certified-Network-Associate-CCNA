@@ -2905,6 +2905,142 @@ Symmetric Key encryption is used to encrypt bulk data (AES).
 # Integrity 
 
   - Ensure that data has not been tempered with 
+  - Know that the data has traversed unchanged between two parties 
+  - hash, trap-door, digest
+  - one way 
+  - converts to a fixed length hash - MD5 = 128 bits 
+  - Not reversible - lost value 
+  - hash will change if input value change 
+
+MD5 : 128 Bits 
+SHA-1 : 160 bits 
+SHA-2 : 256/512 Bits 
+SHA-3 : Scheduled for 2012 
+
+# Hash Message Authentication Code (HMAC) :  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Authentication : 
+
+  - Knowing that data received is the same data that was sent and that the claimed sender is in fact that actual server
+  - Goes beyond validating the source attempting to access a service during initial logon. 
+  - you should also validate that the source has not been replaced by an attacking host in the course of the conversation
+    (session hijacking) 
+
+Two type of authentication : 
+
+ 1. Pre Shared Key (PSK) : 
+	A secret key value is entered into each peer manually and is used to authenticate the peer 
+ 2. RSA Signature : 
+	encrypt the hash with a private key 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Certificate of Authority : 
+  
+  - COA as a trusted third party 
+  - The Certificate of Authority does that by taking data from one side(public key ) and hash the data and then signing it with 
+    certificate of authority private key. 
+    data + public key -> hash the data + sign the data with private key 
+	
+  - This infrastructure is known as Public key infrastructure (PKI) 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# IP Sec : 
+
+Ques : What is IP sec ?? 
+
+  - IP Security
+  - IP Security is a Network layer Protocol, It is a Suite of Protocols that protect and authenticate IP packets.
+  - It's a Framework of Open Standards that is algorithm independent and thus can use multiple algorithms.
+
+There are three main  IP Sec protocols : 
+
+1. Internet Key Exchange (IKE) : 
+   - Provide a framework for negotiating security parameters and establishing authenticated keys 
+
+2. Authentication Header (AH) : 
+   - NO encryption 
+   - Authentication 
+   - Integrity 
+
+3. Encapsulating Security Payload (ESP) : 
+   - Encryption 
+   - Authentication 
+   - Integrity 
+
+# Mode of IP sec : 
+
+1. Transport Mode : 
+   - The Original IP Header of the packets being encrypted is used to transport the packet 
+
+2. Tunnel Mode : 	
+   - The original IP header is not used to transport the packets 
+   - A New IP Header is tagged in front 
+	- IP addresses of Peer Devices, not originating host and destination host 
+  
+# IPSec framework : 
+   
+   - IPsec protocol 
+	- ESP or AH or ESP + AH 
+   - Encryption : 
+	- DES or 3DES or AES 
+   - Authentication 
+	- MD5 or SHA 
+   - DH 
+	- DH1 or DH2 or DH3  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Types of VPNs
+
+1. Site-to-Site VPNs :
+	- IPSec Tunnel : Setup a secure VPN tunnel between R1 and R2 
+	- established between router and router 
+
+2. Remote Access IPSec VPN : 
+	- Set up a secure VPN tunnel between PC and router 
+	- PC uses software like the cisco vpn client 
+	- You have to install a client side software 
+
+3. Remote Access SSL VPN : 
+	- Set up a secure VPN Tunnel between PC and router 
+	- NO PC software is required 
+	- Advantage is that you don't need to install any software. 
+
+# Benefits of Using VPN : 
+	- Cost Savings
+	- Security 
+	- Scalability 
+	- compatibility and broadband 
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Generic Routing Encapsulation Tunneling (GRE) : 
+ 	
+  - A GRE tunnel is a PPP tunnel that allows you to transport multi higher level protocols such as 
+	- IPv4 
+	- IPv6 
+  - It doesnot provide authentication and encryption 
+  - It supports multicast routing protocols 
+  - GRE tunnel would be put inside an IPsec tunnel to provide the encryption and authentication  
+  - GRE encapsulate other taffic 
+	 - 20 Byte IP Header 
+	 - 4 Byte GRE header 
+ 
+Configuring GRE Tunnel : 
+
+Router(config)# interface tunnel 0 
+router(config-if)# ip address 10.1.1.1 255.255.255.252 
+Router(config-if)# tunnel mode gre ip 
+Router(config-if)# tunnel source [router outboud ip address] 
+Router(config-if)# tunnel destination [dest. address] 
+
+configure this on other side also 
+
  
 
 ------------------------------------------------------------------------------------------------------------------------------
