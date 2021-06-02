@@ -3056,6 +3056,121 @@ Note We need to run routing protocol on both the end of the tunnel so the router
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+# Wireless Networks : 
+ 
+  - Two Bands 2.4ghz and 5.0 ghz 
+  - 5ghz get absorbed lot more by a wall than a 2.4 ghz 
+  - 5 ghz allow to you for high throughput or more data transmission through the network 
+  - Dead Spot where the signal become very low 
+  - Wifi is a type of hub 
+ 
+	Wifi Generation 	Amendment 	Release Year
+	   Wi-Fi 1 		802.11b		  1999
+	   Wi-Fi 2 		802.11a 	  1999
+	   Wi-Fi 3		802.11g		  2003 
+	   Wi-Fi 4 		802.11n 	  2009 
+	   Wi-Fi 5 		802.11ac	  2013
+	   Wi-Fi 6		802.11ax	  2019 
+
+SSID : Service Set Identifiers 
+  - These identify different Wi-Fi networks  
+ 
+# Radio Frequency : 
+	
+1. 2.4 GHz 
+   - Range 2.400 to 2.4835 GHz 
+
+2. 5 GHz 
+   - Range 5.150 to 5.825 GHz
+	- 5.150 - 5.250
+	- 5.250 - 5.350
+	- 5.470 - 5.725 
+	- 5.725 - 5.825 
+
+# Wi-Fi Channels : 
+
+1. Wi-Fi 2.4GHz Channels : 
+	1,6,11 are the channels that we should use so that we don't have overlapping transmission with other devices in the same 	frequency range. 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Network Types : 
+
+1. Adhoc mode Wireless Network 
+	- In this mode we have two device that talk directly to each other 
+	- Also known as Independent basic Service Set 
+	- Clients connect directly without AP 
+
+2. Infrastructure mode wireless network 
+
+	- In this mode we have a wireless access point or wireless router and communication from device to device via access point 
+	- Basic Service Set 
+	- Mobile client uses a single AP 
+	- Access point is connected to physical infrastructure 
+	- Only ONE access point 
+
+  Infrastructure mode : 
+	- Extended Service Set (ESS) 
+	- Two or more BSSs 
+	- Connected by a common distribution system
+		- A Common Physical Network that allows multiple users to connected to the WIFI network and then get to the 
+		  internet or to get to the server and other system on the physical network 
+	- In this we have MULTIPLE access Point  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Autonomous access point : 
+	- autonomous access point is an access point that you configure and manage directly 
+
+# Lightweight Access Point : 
+	- Lightweight Access point which require a wireless lan controller (WLC) to work  
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Wireless LAN Controller : 
+
+A WLAN is a wireless architecture that aims to meet changing network demands. A WLAN controller manages wireless network access points that allow wireless devices to connect to the network.
+
+What a wireless access point does for your network is similar to what an amplifier does for your home stereo. It takes the bandwidth coming from a router and stretches it so that many devices can go on the network from farther distances away.
+
+Configuring WLC : 
+
+  - WLC has a default ip address of 192.168.1.1
+  - 	
+WPA2 Personal : In this we are not using a radius server 
+	- WPA Personal is also refered as WPA-PSK(pre-shared key) mode. designed for home and small officies network and 
+	  doesn't require an authentication server. 
+WPA2 Enterprise : this uses radius server for better authentication
+	- WPA-Enterprise : Also refered to as WPA-802.1X mode, and sometimes just WPA(as opposed to WPA-PSK) Design for 
+	  Enterprise network and require a RADIUS authentication server. 
+ 
+NOTE 1. Vitual IP address is required by the controller, Cisco uses 192.0.2.1 by default now 
+NOTE 2. You must need to configure WLC address in dhcp server 
+ 
+ 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# 802.11 Topologies : 
+
+802.11 is a IEEE standard for WI-FI 
+
+# Three types of Topologies : 
+
+1. Independent basic Service sets (IBSS)
+	- That basically a Adhoc Network 
+2. Basic Service Set (BSS)
+	- This use Infrastructure mode 
+3. Extended Service Set (ESS) 
+	- This also use infrastructure mode 
+
+# Service Set : 
+
+	- Logical Grouping of devices  
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
