@@ -3,4 +3,5 @@
 2. Switched Virual Interfaces , Switch Port interfaces are typically used in campus environment where you need to tag multiple
    VLANs across an interface. 
 3. A routed port doesn't have a concept of VLANs there are no VLANs so you don't run spanning tree and you don't run DTP. 
+4. To enable Inter-VLAN Routing or Layer 3 Functionality we need to have the "ip routing" command enabled on switch. 
 
