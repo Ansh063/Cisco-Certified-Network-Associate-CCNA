@@ -3169,6 +3169,49 @@ NOTE 2. You must need to configure WLC address in dhcp server
 
 	- Logical Grouping of devices  
 
+------------------------------------------------------------------------------------------------------------------------------
+
+# Swich Staking : 
+	
+HSRP : In order to optimize routing we need to use HSRP. 
+
+What is the advantage of stacking switches in this way ? 
+
+Brief : 
+  - When you stack switches they appear to be single switch. 
+  - you configure as a single switch 
+  - They act as a single switch 
+  - Spanning tree and CDP see that switch as a single switch 
+  - Cisco Various technologies that you can use to stack switches or aggregate chassis 
+  
+# Switch Stacking and chassis aggregation : 
+  - Separate physical switches, work together and cooperate together to act and appear as a single switch rather than multiple
+    discrete switches. 
+Switch Stacking is often used at the access layer and chassis aggregation is often used at the distribution and core layer of 
+network. 
+
+1. You would manage the stack with a single management ip address 
+2. Telnet or SSH to one switch 
+3. One Configuration File 
+4. STP, CDP, VTP are running on one switch 
+5. The ports on each physical switches appear to be the part of the same logical switch 
+6. One MAC Address table 
+
+To connect the switch together you need special hardware ports called stacking port.
+Stacking cables forms a ring between switches. 
+One of the switch in the ring is stack master and it is used to control the rest of the switches in the stack. Brain of the stack
+
+
+Chassis Aggregation : 
+
+It is another cisco technology which allows you to make multiple switch operate at a single switch. 
+It is used for higher end switches. 
+Does not require special hardware adaptors 
+2 switches 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------
 
