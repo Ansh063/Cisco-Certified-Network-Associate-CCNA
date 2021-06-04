@@ -255,6 +255,7 @@ CSMA/CD : Carrier Sense Multiple access / Collision detection
 This operates as follows when a device want to send traffic it should first check to hear if any other device is speaking so the device will not communicate onto the network if it hears another device. : Carrier Sense. 
 Multiple access means that any device can communicate across the segment as long as no other device is communicating. 
 When a device detect that a collision has taken place it may send a "Backoff / JAM " signal to indicate that the collision has taken place.
+CSMA/CD works in LAN & CSMA/CA works in Wireless LANS 
 
 -------------------------------------------------------------------------------------------------------------------------------
 Devices  : 

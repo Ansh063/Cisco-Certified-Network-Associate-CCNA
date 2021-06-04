@@ -4,4 +4,70 @@
    VLANs across an interface. 
 3. A routed port doesn't have a concept of VLANs there are no VLANs so you don't run spanning tree and you don't run DTP. 
 4. To enable Inter-VLAN Routing or Layer 3 Functionality we need to have the "ip routing" command enabled on switch. 
+5. Router Will Block a Broadcast Domain 
+6. Mordern Router by default do not forward boradcat frames 
+7. Switches can also provide broadcast domain segmentation using virtual LANs (VLANs). 
+8. A router not only breaks collision domains but also break broadcast domains, means it is both collision as well as broadcast domain separator.
+9. Native VLAN : If a packet is received on a dot1q link, that does not have VLAN tagged it is assumed that it belongs to native
+		 VLAN. 
+		 Default Native Vlan is VLAN1
+10 NATIVE VLAN Best Practices : 
+	- Best Practise is to configure the NATIVE VLAN ID to VLAN666 and to ensure that this VLAN is not in use anywhere in 
+	  the network 
+	- No ports should be assign to native VLAN 
+	- An Attacker who attempts to use the VLAN Hopping attack will end up in a dead VLAN that has no host to leaverage 
+11 Configuration of Native VLAN : 
+	Switch(config)# vlan 999 
+	Swicth(config)# interface gig0/0
+	Switch(config-if)# switchport mode trunk 
+	Switch(config-if)# switchport trunk native vlan 999 
 
+12. For Cisco Switches the Native VLAN ID must match on both end of the trunk 
+13. Confirmation Command ; 
+	1. show interface trunk
+	2. show interface gig0/0 switchport 
+
+14. Broadcast Domain and Collision Domain : 
+	
+1. Broadcast Domain : 	
+	- Set of all the devices that receive broadcast frames originating from any device within a set 
+2. Collision Domain : 
+	- A Collision Domain is a network segment with two or more devices sharing the same bandwidth. (Where there is a chance of collision)
+	- In HUB there is only one collision Domain Because two device cannot sent at a same time. 
+	- In SWITCH each and every port has a seperate collision Domain. 
+		- PORT = Collision Domain 
+NOTE : HUB has 1 Collision Domain and 1 Broadcast Domain 
+
+15. Proxy ARP : This will allow a device to proxy the default gateways of other device. 
+16. You can have a port configuration in a VLAN and not have that VLAN in the VLAN Database ,if that is true the port is essentially in a error disable state, It would not work. 
+17. VTP removes the VLAN from the database but doesn't take the port out of the VLAN 
+18. CDP allows you to check layer 2 connectivity. 
+19. DTP will be disable automatically if we make that port access 
+20. To enable cdp run : "cdp run" in global config mode. 
+21. CDP is cisco proriatory and LLDP is an IEEE standard, it is not enable by default on cisco devices. 
+22. To Enable LLDP run : "lldp run" in global config mode. 
+23. CDP send update in every 60 seconds and lldp sends update in every 30 seconds. 
+24. Spanning tree forward blocking ports transmit and receive management packets (network management protocols) Like CDP, LLDP, DTP. 
+25. When using PVST+ / RPVST+ the bridge (switch Priority) = priority + VLAN number   
+26. spanning-tree vlan 20,100 priority 0 : this command is used to divide the traffic between different up-links 
+27. EtherChannel = Port Aggregation = Port Channel 
+28. when you add physical interfaces to port channel you need to do the configuration on the port-channel rather than on 
+    physical interface. The configuration that you do on the logical port channel should filter down to the physical interface
+29. The config you apply on the logical port channel should be copied and applied on the physical interfaces by switch. 
+30 Configuration of PORT CHANNEL : 
+
+	1. Create a EtherChannel(Port Channel) : 
+		Switch(config)# interface range gig1/0/23 - 24
+		Switch(config-if-range)# channel-group 1 mode active 
+	2. Configure interface settings on the port channel, these setting are inherited by the interfaces 
+		Switch(config)# interface port-channel 1
+		Switch(config-if)# switchport trunk encapsulation dot1q 
+		Switch(config-f)# switchport mode trunk 
+31. If i do the configuration on the physical interface it's is not applied to the port-channel but configuration applied to port channel is pushed down to the physical interface. 
+32.  1.  spanning-tree vlan 1 root primary 
+     2.  spanning-tree vlan 1 priority 0 
+33. 	
+
+
+	
+	   
