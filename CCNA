@@ -3211,8 +3211,83 @@ Does not require special hardware adaptors
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+In a traditional Network, every device has its own data plane or forwarding plane they have their own control plane.
+RIB = Route Information Base (Software)
+FIB = Forwarding Information Base (Hardware / ASICs )
+
+Device talk to the controller using southbound API or South Interface (SBI) 
+The controller at the top talked down to the device using southbound api.(OPENFLOW, cli, SNMP, NETCONF,RESTCONF) 
+an application developer talk to the controller using Northbound api (REST API)  
+# There are Three plane : 
+	1. Management Plane : 
+		- Telnet,SSH,SNMP, syslog 
+	2. Control Plane : 
+		- OSPF
+ 	3. Data Plane : 
+		- IPv4 
+
+# Differences between Puppet, Chef and Ansible : 
+
+Ansible is Agent less : You don't have to run an agent on the router.
+if you want to run puppet or chef, you have to run an agent which is a piece of software. 
 
 
+Action 			Ansible 		Puppet 			chef
+Term for the file	Playbook 		Manifest		Recipe, Runlist
+that lists actions
+
+Protocol to Network	SSH, NETCONF		HTTP(REST)		HTTP(REST)
+
+User Agent or 		Agentless 		Agent			Agent 
+agentless model	
+
+PUSH or PULL Model	Push			PULL			PULL 
+
+ 
+# Overlays, Underlays, VXLAN and intelligence : 
+
+Underlay Network is physical infrastructure above which overlay network is built. An Overlay Network is a virtual network 
+that is built on top of an underlying Network infrastructure/Network layer (the underlay). 
+Transmits packets which traverse over network devices like switches and routers.
+
+Overlay are like vitual tunnel. 
+
+# Autopilot : 
+
+we give computer a low level task and we take the high level task 
+
+# SDA ( Software Define Excess ) : 
+
+It is Cisco solution of changing the way a enterprise network works. 
+We building tunnels automatically the excellent tunnel , where we build an overlay across the underlying network 
+Tunnels VXLAN which allows us to apply policies on the overlay network  rather than underlaying network 
+SDA is an enterprise solution where we take software defined principle and apply it to an enterprise and we apply policies 
+on that network rather than in a data center 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# JSON : Javascript Object Notation : 
+
+Json is a way to format data, It also way to send data from one machine to another
+
+# JSON Data : 
+	 
+  - JSON Data is written as name/value pairs : 
+  - A Name / Vaue pair consists of a field name (in double quotes), Followed by a colon, followed by a value 
+  - "firstname" : "David"
+
+# Type of JSON data : 
+
+1. Objects : 
+   - Unordered collection of key:value pairs 
+   - Data surrounded by curls brackets 
+   - Key and value is separated by : 
+   - Each key/value pair is separated by commas 
+   - Use double quotes not single quotes 
+   - Boolean value must be lowercase 
+    
+2. Raise :  
+   - 	
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
