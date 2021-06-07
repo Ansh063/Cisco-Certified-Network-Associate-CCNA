@@ -3332,6 +3332,10 @@ Application Programming Interface allows us to get one application to interact w
   	
 ------------------------------------------------------------------------------------------------------------------------------
 
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
 Cisco Packet Tracer Commands 
 
 show mac-address table  : display the mac address table 
@@ -3443,4 +3447,12 @@ test etherchannel load-balance interface po1 mac {mac_address}
 
 -> User EXEC (also called user mode ) : this is the first level of access. can only use a limited set of commands prompt: switch > 
 -> Privilege EXEC (also called enable mode / mode like root ) or administrative mode prompt : Switch#
- 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Some concepts : 
+
+1. VTP mode to Transparent so that every switch uses its own local database of VLANs 
+2. VTP Server allow you to create VLANs and they also synchronize with other switches in the topology 
+3. interface vlan 1 : this command create a switch Virtual Interface 
+4.  
