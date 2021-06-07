@@ -3299,13 +3299,37 @@ Json Data tyoes :
    - uses square bracket [ ] 
    - can store multiple types : 
 	json array can store valid json data types such as strings,numbers, boolean, object, null or another array 
-   - values must be seperated by commas. 
-
-	     
-
+   - values must be seperated by commas.  
 
 2. Raise :  
-   -  	
+ 
+------------------------------------------------------------------------------------------------------------------------------
+
+# Rest APIs : 
+
+REST : Representational State Transfer 
+   - It is architectural style for distributed hypermedia system 
+1. Client-Server 
+2. Stateless 
+3. Caching
+4. Uniform interface 
+5. Layered System 
+6. Code on Demand 
+
+# CRUD : 
+
+(POST) :  Create : Allow the client to create some new instances of variable and Data structure at the server and initialize 
+	    	   their values as kept at the server.
+
+(GET) Read : Allow the client to retrieve the current value of variable that exist at the server, storing the copy of the 
+	     variables,structures, and values of the client. 
+	 
+(PATCH, PUT) Update : allow the client to change the value of variable that exist at the server. 
+
+(DELETE) Delete : Allow the client to delete from the server different instances of data variables. 
+
+Application Programming Interface allows us to get one application to interact with another application.
+  	
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
