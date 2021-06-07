@@ -3285,9 +3285,27 @@ Json is a way to format data, It also way to send data from one machine to anoth
    - Each key/value pair is separated by commas 
    - Use double quotes not single quotes 
    - Boolean value must be lowercase 
-    
+
+Practical : 
+
+   - show interface vlan 100 | js 
+   - show interface vlan 100 | json-pretty 
+   - show ip interface brief | json-pretty 
+ 
+Json Data tyoes : 
+	
+1. Array : 
+   - Ordered list of values 
+   - uses square bracket [ ] 
+   - can store multiple types : 
+	json array can store valid json data types such as strings,numbers, boolean, object, null or another array 
+   - values must be seperated by commas. 
+
+	     
+
+
 2. Raise :  
-   - 	
+   -  	
 ------------------------------------------------------------------------------------------------------------------------------
 
 Cisco Packet Tracer Commands 
