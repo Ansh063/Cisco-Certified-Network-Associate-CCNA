@@ -3455,4 +3455,15 @@ Some concepts :
 1. VTP mode to Transparent so that every switch uses its own local database of VLANs 
 2. VTP Server allow you to create VLANs and they also synchronize with other switches in the topology 
 3. interface vlan 1 : this command create a switch Virtual Interface 
-4.  
+4. To Disable DTP run : switchport nonegotiate 
+5. Switchport access vlan 1 : this is default common so ot will not be display in show run command 
+6. show cdp neighbour detail
+7. no cdp run : to shut down the cdp 
+8. Sending CDP packets in every 60 Seconds 
+9. Sending a holdtime value of 180 seconds
+10. show cdp entry * : shows all neighbouring devices 
+11. show cdp entry [name of switch or router] : Name should be case sensitive 
+12. show cdp traffic 
+13. show lldp neighbours 
+14. management traffic such as DTP, VTP, LLDP, CDP are not blocked by spanning tree 
+15.   
