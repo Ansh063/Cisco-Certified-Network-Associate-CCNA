@@ -3508,10 +3508,9 @@ EIGRP :
 	in RIP and EIGRP, and send the actual subnet mask. 
 		
 NAT : 
-	ip nat 
-	
-
-
-
-  
-   
+	ip nat outside 
+	ip nat inside 
+	ip nat inside source list 1 interface [inside interface] overload 
+	access-list 1 permit 10.0.0.0 0.255.255.255 
+	show ip nat translation 
+	 	
