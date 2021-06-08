@@ -3466,4 +3466,52 @@ Some concepts :
 12. show cdp traffic 
 13. show lldp neighbours 
 14. management traffic such as DTP, VTP, LLDP, CDP are not blocked by spanning tree 
-15.   
+15. To improve spanning tree performance we want to make port to Point to Point
+16. Point-to-Point Ports converges lot quicker when using rapid spanning tree 
+17. Spanning-tree link-type point-to-point
+18. HSRP (Hot State-by Routing Protocol) : 
+	- Implemented to get redundancy at layer 3 
+	- first hop redundancy protocol 
+	- HSPR is a Cisco Prorietary Protocol that allows you to implement first hop redundancy 
+	- The Industry Standard Protocol are VRRP (Virtual Router Redundancy Protocol) 
+    Idea : The Idea here is that you configure two switch with a virtual IP Address, These two switches will have an election 
+	   and choose who is incharge of forwarding traffic of a virtual router. 
+	   - On your PC you have to configure the default gateway of the virtual router/Virtual Switch 
+	   - The PCs are unaware that they are talking to the virual route. 
+	   - The Default Priority on HSRP is 100 and the highest priority ones. 
+	   - The Device with the highest priority will become the forwarder for a VLAN. 
+    
+    Configuring HSRP : 
+    S1(config)# interface vlan 10
+    S1(config-if)# standby 1 ip [address of virtual router]
+    S1(config-if)# standby 1 priority 200      [ Higher is better ] 
+    S1(config-if)# standby 1 preempt 
+	Preemption does is ensure that switch one becomes the act of router when it is UP switch 2 wen up when switch 1 goes down
+	It force to become the active router. 
+    S1# show standby 
+    Mac Address of the Virtual Router will : 0000.0c07.ac01    last 2 "01"  represents the group number in hex. 
+    Same group number will be used by both sides.
+    
+
+NOTE : On a router if you have enable the command ip routing on the router then you need to configure a static default route 
+       to the gateway using : 
+		ip route 0.0.0.0 0.0.0.0 [default gateway]
+		   
+	another way to configure default route is with command "no ip routing". to set the default gateway run : 
+		ip default-gateway [default-gateway]
+
+     
+EIGRP : 
+	automatic summarzation is disabled by default 
+	If you are using a routing protocol that auto-summarizes (such as RIP or EIGRP) it will send the subnet mask of the 
+	classful boundary, and not the actual subnet mask. The command no auto or no auto summary will turn this feature off 
+	in RIP and EIGRP, and send the actual subnet mask. 
+		
+NAT : 
+	ip nat 
+	
+
+
+
+  
+   
