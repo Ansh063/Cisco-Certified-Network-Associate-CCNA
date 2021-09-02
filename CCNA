@@ -1,10 +1,10 @@
 
-
 Cisco Certified Network Associate - Notes : 
+
 
 -> IP is 32 bit Binary Number.
 -> 1 Byte = 8 Binary Bits.
--> Router always check for network Section of IP address for routing packets.
+-> Router always check for network Section of IP address for routing packets. 
 
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ Class E = 240.0.0.0 - 255.255.255.255
 
 -------------------------------------------------------------------------------------------------------------------------------
 
-# Private Ip Address : non routeable on the internet.  
+# Private Ip Address : non Routable on the internet.  
 ## IPv4 Private Ip range : 
 --------------------------
 
@@ -60,6 +60,11 @@ RFC1918 name	IP address range	        Largest CIDR block          Host ID size  
 24-bit block	10.0.0.0 – 10.255.255.255	10.0.0.0/8 (255.0.0.0)	      24 bits	   8 bits	single class A network
 20-bit block	172.16.0.0 – 172.31.255.255     172.16.0.0/12 (255.240.0.0)   20 bits      12 bits	16 contiguous class B networks
 16-bit block	192.168.0.0 – 192.168.255.255	192.168.0.0/16 (255.255.0.0)  16 bits	   16 bits	256 contiguous class C networks
+
+10.0.0.0 - 10.255.255.255
+172.16.0.0 - 172.31.255.255
+192.168.0.0 - 192.168.255.255
+
 
 ## IPv6 Private Ip : 
 --------------------
@@ -152,7 +157,7 @@ Network 		SUBNET		HOST 		Single Octet
 .
 .
 .
-Last networ= 10.1.1.	1111		0000		10.1.1.240/28
+Last network= 10.1.1.	1111		0000		10.1.1.240/28
 
 To find subnet = 2^n = 2^4 = 16
 To find host = 2^n -2  = 16-2 = 14
@@ -3514,3 +3519,8 @@ NAT :
 	access-list 1 permit 10.0.0.0 0.255.255.255 
 	show ip nat translation 
 	 	
+
+
+
+
+
